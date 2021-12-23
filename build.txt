@@ -1,0 +1,3 @@
+displayName = Card Mod
+author = Vincent Jenei (Lite#4211), Fox (basically, i am little fox#5356)
+version = 0.1
