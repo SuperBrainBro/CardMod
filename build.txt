@@ -1,3 +1,8 @@
 displayName = Card Mod
-author = Vincent Jenei (Lite#4211), Fox (basically, i am little fox#5356)
+author = FoxXD_, Vincent Jenei
 version = 0.1
+hideCode = true
+hideResources = true
+includeSource = false
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, *.fx, *.exe, *.dll, .gitattributes
+includePDB = false

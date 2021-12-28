@@ -10,4 +10,8 @@
   <ItemGroup>
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Items\Cards\Boss\" />
+    <Folder Include="Assets\Items\Cards\Hardmode\" />
+  </ItemGroup>
 </Project>
