@@ -19,7 +19,7 @@ namespace CardMod
             mod = this;
 
             IL.Terraria.Player.TorchAttack += Player_TorchAttack;
-            IL.Terraria.Player.UpdateBuffs += Player_UpdateBuffs;
+            //IL.Terraria.Player.UpdateBuffs += Player_UpdateBuffs;
         }
 
         public override void Unload()
@@ -27,7 +27,7 @@ namespace CardMod
             mod = null;
 
             IL.Terraria.Player.TorchAttack -= Player_TorchAttack;
-            IL.Terraria.Player.UpdateBuffs -= Player_UpdateBuffs;
+            //IL.Terraria.Player.UpdateBuffs -= Player_UpdateBuffs;
         }
 
         private void Player_TorchAttack(ILContext il)
@@ -47,7 +47,7 @@ namespace CardMod
             });
         }
 
-        private void Player_UpdateBuffs(ILContext il)
+        /*private void Player_UpdateBuffs(ILContext il)
         {
             var c = new ILCursor(il);
 
@@ -99,7 +99,7 @@ namespace CardMod
             {
                 return (int)(40 * player.Card().infernoLevel);
             });
-        }
+        }*/
 
         public override object Call(params object[] args)
         {
