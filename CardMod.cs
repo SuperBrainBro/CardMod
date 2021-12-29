@@ -1,9 +1,9 @@
-using System;
 using CardMod.Content.Items.Cards.PreHardmode;
 using CardMod.Core;
 using Microsoft.Xna.Framework;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
