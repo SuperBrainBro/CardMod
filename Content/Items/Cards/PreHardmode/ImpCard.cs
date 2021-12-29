@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using CardMod.Core;
+﻿using CardMod.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -13,29 +12,23 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class ImpCard : BaseCard
     {
-        public ImpCard() : base(CardRarity.Uncommon, "Imp Card", "Weak Inferno", "Gives you weak inferno rings, which ignite enemies around you.")
+        public ImpCard() : base(CardRarity.Uncommon, "Imp Card", "Weak Inferno", "Gives you weak inferno rings," +
+            "\nwhich ignite enemies around you")
         {
         }
 
-
         public override void SafeSetDefaults() => isCard = true;
 
-        public override void CardEffects(Player player, bool hideVisuals) => player.Card()._cardImp = true;
-
-        public override void SafeModifyTooltips(ref List<TooltipLine> tooltips)
+        public override void CardEffects(Player player, bool hideVisuals)
         {
-            TooltipLine line = tooltips.Find(x => x.mod == Mod.Name && x.Name == "Tooltip3");
-            if (line != null)
-                line.overrideColor = Color.Red * alpha;
-            line = tooltips.Find(x => x.mod == Mod.Name && x.Name == "Tooltip4");
-            if (line != null)
-                line.overrideColor = Color.Red * alpha;
+            player.Card()._cardImp = true;
+            player.Card().infernoLevel += 1f;
         }
     }
 
     public class ImpCardRings : PlayerDrawLayer
     {
-        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo) => drawInfo.drawPlayer.Card()._cardImp && !drawInfo.drawPlayer.inferno;
+        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo) => drawInfo.drawPlayer.Card().InfernoWeak;
 
         public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.IceBarrier);
 
@@ -46,7 +39,7 @@ namespace CardMod.Content.Items.Cards.PreHardmode
             if (drawInfo.shadow != 0.0)
                 return;
 
-            if (player.active && !player.outOfRange && modPlayer._cardImp && !player.inferno && !player.dead)
+            if (player.active && !player.outOfRange && modPlayer.InfernoWeak && !player.dead)
             {
                 if (TextureAssets.FlameRing.State == 0)
                 {

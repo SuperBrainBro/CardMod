@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CardMod.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using CardMod.Core;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

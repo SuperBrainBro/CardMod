@@ -5,7 +5,7 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class UmbrellaSlimeCard : BaseCard
     {
-        public UmbrellaSlimeCard() : base(CardRarity.Rare, "Umbrella Slime Card", "Umbrella", "Allows slowfall and removes fall damage.")
+        public UmbrellaSlimeCard() : base(CardRarity.Rare, "Umbrella Slime Card", "Umbrella", "Allows slowfall and removes fall damage")
         {
         }
 

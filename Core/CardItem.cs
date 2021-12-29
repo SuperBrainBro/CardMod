@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using CardMod.Content.Slots;
+﻿using CardMod.Content.Slots;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -53,7 +53,7 @@ namespace CardMod.Core
                 _ => ModContent.RarityType<CardMod.Rarities.Common>(),
             };
 
-            Item.GetGlobalItem<CardGlobalItem>().isCard = isCard;
+            Item.Card().isCard = isCard;
             if (isCard)
                 Item.accessory = true;
         }

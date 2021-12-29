@@ -15,7 +15,13 @@ namespace CardMod.Core
         public bool _cardWof;
         public bool _cardImp;
         public bool _cardSlime;
-        public bool _cardTim;
+
+        public float infernoLevel;
+
+        public bool InfernoWeak => infernoLevel is < 3f and >= 1f;
+        public bool InfernoMedium => infernoLevel is >= 3f and < 5f;
+        public bool InfernoStrong => infernoLevel is >= 5f and < 9f;
+        public bool InfernoSpecial => infernoLevel >= 9f;
 
         public override void ResetEffects()
         {
@@ -24,33 +30,7 @@ namespace CardMod.Core
             _cardWof = false;
             _cardImp = false;
             _cardSlime = false;
-
-            if (_cardTim)
-            {
-                Player.statManaMax2 += 40;
-            }
-        }
-
-        public override void ModifyWeaponCrit(Item item, ref int crit)
-        {
-            if (_cardTim)
-            {
-                if (item.mana >= 1)
-                {
-                    crit += 8;
-                }
-            }
-        }
-
-        public override void ModifyWeaponDamage(Item item, ref StatModifier damage, ref float flat)
-        {
-            if (_cardTim)
-            {
-                if (item.mana >= 1)
-                {
-                    damage += 4;
-                }
-            }
+            infernoLevel = 0;
         }
 
         public override void UpdateDead()
@@ -62,6 +42,7 @@ namespace CardMod.Core
             _cardWof = false;
             _cardImp = false;
             _cardSlime = false;
+            infernoLevel = 0;
         }
 
         public override void PreUpdate()
@@ -71,7 +52,7 @@ namespace CardMod.Core
             if (_volatileCD > 0)
                 _volatileCD--;
 
-            if ((_cardWof || _cardImp) && !Player.inferno)
+            if (_cardWof || _cardImp)
             {
                 Lighting.AddLight((int)(Player.Center.X / 16.0), (int)(Player.Center.Y / 16.0), 0.65f, 0.4f, 0.1f);
                 int type = 24;
@@ -86,7 +67,7 @@ namespace CardMod.Core
                         if (npc.active && !npc.friendly && npc.damage > 0 && !npc.dontTakeDamage && !npc.buffImmune[type] && Player.CanNPCBeHitByPlayerOrPlayerProjectile(npc) && Vector2.Distance(Player.Center, npc.Center) <= num1)
                         {
                             if (npc.FindBuffIndex(type) == -1)
-                                npc.AddBuff(type, 120);
+                                npc.AddBuff(type, _cardImp ? 60 : 180);
                             if (flag)
                                 Player.ApplyDamageToNPC(npc, num2, 0.0f, 0, false);
                         }
@@ -99,7 +80,7 @@ namespace CardMod.Core
                             if (player2 != Player && Player.active && !Player.dead && Player.hostile && !Player.buffImmune[type] && (player2.team != Player.team || Player.team == 0) && (double)Vector2.Distance(Player.Center, Player.Center) <= num1)
                             {
                                 if (Player.FindBuffIndex(type) == -1)
-                                    Player.AddBuff(type, 120);
+                                    Player.AddBuff(type, _cardImp ? 60 : 180);
                                 if (flag)
                                 {
                                     Player.Hurt(PlayerDeathReason.LegacyEmpty(), num2, 0, true);
@@ -115,7 +96,5 @@ namespace CardMod.Core
                 }
             }
         }
-
-
     }
 }

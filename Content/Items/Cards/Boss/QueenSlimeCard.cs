@@ -7,10 +7,9 @@ namespace CardMod.Content.Items.Cards.Boss
 {
     public class QueenSlimeCard : BaseCard
     {
-        public QueenSlimeCard() : base(CardRarity.Epic, "Queen Slime Card", "Volatile Bloons", "You project volatile ballons periodically while moving.")
+        public QueenSlimeCard() : base(CardRarity.Epic, "Queen Slime Card", "Volatile Bloons", "You project volatile ballons periodically while moving")
         {
         }
-
 
         public override void SafeSetDefaults() => isCard = true;
 
@@ -43,6 +42,7 @@ namespace CardMod.Content.Items.Cards.Boss
                         Main.projectile[num].friendly = true;
                         Main.projectile[num].hostile = false;
                         Main.projectile[num].DamageType = player.HeldItem.DamageType;
+                        Main.projectile[num].Card().isCard = true;
                     }
                     player.Card()._volatileCD = 150;
                 }

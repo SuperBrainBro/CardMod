@@ -1,27 +1,18 @@
-﻿using System.Collections.Generic;
-using CardMod.Core;
+﻿using CardMod.Core;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class TorchGodCard : BaseCard
     {
-        public TorchGodCard() : base(CardRarity.Uncommon, "Torch God Card", "The Torch", "Infinite light emition.")
+        public TorchGodCard() : base(CardRarity.Uncommon, "Torch God Card", "The Torch", "Infinite light emition")
         {
         }
 
 
         public override void SafeSetDefaults() => isCard = true;
-
-        public override void SafeModifyTooltips(ref List<TooltipLine> tooltips)
-        {
-            TooltipLine line = tooltips.Find(x => x.mod == Mod.Name && x.Name == "Tooltip0");
-            if (line != null)
-                line.overrideColor = Color.DarkGray * alpha;
-        }
 
         public override void CardEffects(Player player, bool hideVisuals)
         {

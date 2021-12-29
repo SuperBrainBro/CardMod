@@ -6,10 +6,9 @@ namespace CardMod.Content.Items.Cards.Hardmode
 {
     public class GreenJellyfishCard : BaseCard
     {
-        public GreenJellyfishCard() : base(CardRarity.Uncommon, "Green Jellyfish Card", "Jelly Weakness", "While in water, enemies nearby have less damage.")
+        public GreenJellyfishCard() : base(CardRarity.Uncommon, "Green Jellyfish Card", "Jelly Weakness", "While in water, enemies nearby have less damage")
         {
         }
-
 
         public override void SafeSetDefaults() => isCard = true;
 

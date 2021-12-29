@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using CardMod.Core;
+﻿using CardMod.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -13,28 +12,19 @@ namespace CardMod.Content.Items.Cards.Boss
 {
     public class WallOfFleshCard : BaseCard
     {
-        public WallOfFleshCard() : base(CardRarity.Epic, "Wall of Flesh Card", "Strong Inferno", "Gives you strong inferno rings, which ignite enemies around you")
+        public WallOfFleshCard() : base(CardRarity.Epic, "Wall of Flesh Card", "Strong Inferno", "Gives you strong inferno rings," +
+            "\nwhich ignite enemies around you")
         {
         }
-
 
         public override void SafeSetDefaults() => isCard = true;
 
         public override void CardEffects(Player player, bool hideVisuals)
         {
             player.Card()._cardWof = true;
+            player.Card().infernoLevel += 5f;
             player.inferno = false;
             player.lifeRegen += 10;
-        }
-
-        public override void SafeModifyTooltips(ref List<TooltipLine> tooltips)
-        {
-            TooltipLine line = tooltips.Find(x => x.mod == Mod.Name && x.Name == "Tooltip4");
-            if (line != null)
-                line.overrideColor = Color.Red * alpha;
-            line = tooltips.Find(x => x.mod == Mod.Name && x.Name == "Tooltip5");
-            if (line != null)
-                line.overrideColor = Color.Red * alpha;
         }
     }
 

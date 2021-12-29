@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -18,7 +18,6 @@ namespace CardMod.Core
         public string cardAbility;
         public string cardAbilityDescription;
 
-
         public sealed override void SetStaticDefaults()
         {
             DisplayName.SetDefault(cardName);
@@ -29,9 +28,9 @@ namespace CardMod.Core
         {
             get
             {
-                if (ModContent.RequestIfExists<Texture2D>((GetType().Namespace + "." + Name).Replace('.', '/').Replace("Content", "Assets"), out _))
-                    return (GetType().Namespace + "." + Name).Replace('.', '/').Replace("Content", "Assets");
-                return $"CardMod/Assets/Items/Cards/Card{cardRarity}";
+                return ModContent.RequestIfExists<Texture2D>((GetType().Namespace + "." + Name).Replace('.', '/').Replace("Content", "Assets"), out _)
+                    ? (GetType().Namespace + "." + Name).Replace('.', '/').Replace("Content", "Assets")
+                    : $"CardMod/Assets/Items/Cards/Card{cardRarity}";
             }
         }
 
