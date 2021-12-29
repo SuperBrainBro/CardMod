@@ -6,7 +6,9 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class TimCard : BaseCard
     {
-        public TimCard() : base(CardRarity.Common, "Tim Card", "Wizardly Chaos", "Increases maximum mana by 40. 8% increased magic critical strike chance. 4% increased magic damage.")
+        public TimCard() : base(CardRarity.Common, "Tim Card", "Wizardly Chaos", @"Increases maximum mana by 40
+8% increased magic critical strike chance
+4% increased magic damage.")
         {
         }
 

@@ -29,7 +29,6 @@ namespace CardMod.Core
             {
                 Player.statManaMax2 += 40;
             }
-                
         }
 
         public override void ModifyWeaponCrit(Item item, ref int crit)
@@ -41,7 +40,6 @@ namespace CardMod.Core
                     crit += 8;
                 }
             }
-
         }
 
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage, ref float flat)

@@ -9,7 +9,6 @@ namespace CardMod.Content.Items.Cards.PreHardmode
         {
         }
 
-
         public override void SafeSetDefaults() => isCard = true;
 
         public override void CardEffects(Player player, bool hideVisuals) => player.Card()._cardNymph = true;

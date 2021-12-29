@@ -11,7 +11,8 @@ namespace CardMod.Content.Items.Cards.Hardmode
 {
     public class GoldenSlimeCard : BaseCard
     {
-        public GoldenSlimeCard() : base(CardRarity.Legendary, "Golden Slime Card", "Money Pants", "Periodically generate a passive income!")
+        public GoldenSlimeCard() : base(CardRarity.Legendary, "Golden Slime Card", "Money Pants", @"Periodically generate a passive income!
+Money Generated:")
         {
         }
 
@@ -22,7 +23,7 @@ namespace CardMod.Content.Items.Cards.Hardmode
 
         public override void SafeModifyTooltips(ref List<TooltipLine> tooltips)
         {
-            TooltipLine index = tooltips.Find(x => x.mod == Mod.Name && x.Name == "Tooltip2");
+            TooltipLine index = tooltips.Find(x => x.mod == Mod.Name && x.Name == "Tooltip1");
 
             if (index != null)
             {

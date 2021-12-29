@@ -13,7 +13,7 @@ namespace CardMod.Content.Items.Cards.Boss
 {
     public class WallOfFleshCard : BaseCard
     {
-        public WallOfFleshCard() : base(CardRarity.Epic, "Wall of Flesh Card", "Strong Inferno", "Gives you strong inferno rings, which ignite enemies around you..")
+        public WallOfFleshCard() : base(CardRarity.Epic, "Wall of Flesh Card", "Strong Inferno", "Gives you strong inferno rings, which ignite enemies around you")
         {
         }
 
