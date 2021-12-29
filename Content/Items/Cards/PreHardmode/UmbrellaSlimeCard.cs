@@ -5,12 +5,10 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class UmbrellaSlimeCard : BaseCard
     {
-        public UmbrellaSlimeCard() : base(CardRarity.Common)
+        public UmbrellaSlimeCard() : base(CardRarity.Common, "Umbrella Slime Card", "Umbrella", "Allows slowfall and removes fall damage.")
         {
         }
 
-        public override void SetStaticDefaults2() => Tooltip.SetDefault(@"Ability: Umbrella!
-Allows slowfall and removes fall damage");
 
         public override void SafeSetDefaults() => isCard = true;
 

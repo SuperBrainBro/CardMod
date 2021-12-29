@@ -5,15 +5,10 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class NymphCard : BaseCard
     {
-        public NymphCard() : base(CardRarity.Rare)
+        public NymphCard() : base(CardRarity.Rare, "Nymph Card", "Sight", "The closer you are to your enemy, the higher damage you inflict upon them.")
         {
         }
 
-        public override void SetStaticDefaults2()
-        {
-            Tooltip.SetDefault(@"Ability: Sight
-The closer the enemy is to you, the higher your damage.");
-        }
 
         public override void SafeSetDefaults() => isCard = true;
 

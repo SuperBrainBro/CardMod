@@ -6,16 +6,8 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class PinkJellyfishCard : BaseCard
     {
-        public PinkJellyfishCard() : base(CardRarity.Common)
+        public PinkJellyfishCard() : base(CardRarity.Common, "Pink Jellyfish Card", "Jelly Regen", "While in water, enemies nearby have less life regeneration.")
         {
-        }
-
-        public override void SetStaticDefaults2()
-        {
-            Tooltip.SetDefault(@"Ability: Electro Jelly Regeneration
-While in water, enemies nearby have less life regeneration
-If enemy life regeneration is zero or lower, enemy will
-slowly take damage");
         }
 
         public override void SafeSetDefaults() => isCard = true;

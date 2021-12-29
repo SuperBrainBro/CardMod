@@ -33,6 +33,8 @@ namespace CardMod.Core
             Item.height = 24;
             SafeSetDefaults();
             SetDefaults2();
+
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public virtual void SafeSetDefaults()
