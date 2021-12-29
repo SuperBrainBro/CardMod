@@ -1,6 +1,6 @@
-﻿using CardMod.Core;
+﻿using System.Collections.Generic;
+using CardMod.Core;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

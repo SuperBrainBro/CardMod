@@ -1,7 +1,7 @@
-﻿using CardMod.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using CardMod.Core;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,8 +11,8 @@ namespace CardMod.Content.Items.Cards.Hardmode
 {
     public class GoldenSlimeCard : BaseCard
     {
-        public GoldenSlimeCard() : base(CardRarity.Legendary, "Golden Slime Card", "Money Pants", @"Periodically generate a passive income!
-Money Generated:")
+        public GoldenSlimeCard() : base(CardRarity.Legendary, "Golden Slime Card", "Money Pants", "Periodically generate a passive income!" +
+            "\nMoney Generated:")
         {
         }
 
@@ -23,7 +23,7 @@ Money Generated:")
 
         public override void SafeModifyTooltips(ref List<TooltipLine> tooltips)
         {
-            TooltipLine index = tooltips.Find(x => x.mod == Mod.Name && x.Name == "Tooltip1");
+            TooltipLine index = tooltips.Find(x => x.mod == Mod.Name && x.Name == "Tooltip2");
 
             if (index != null)
             {

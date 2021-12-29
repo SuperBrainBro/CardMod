@@ -5,7 +5,8 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class NymphCard : BaseCard
     {
-        public NymphCard() : base(CardRarity.Rare, "Nymph Card", "Sight", "The closer you are to your enemy, the higher damage you inflict upon them.")
+        public NymphCard() : base(CardRarity.Rare, "Nymph Card", "Sight", "The closer you are to your enemy," +
+            "\nthe higher damage you inflict upon them.")
         {
         }
 

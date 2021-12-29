@@ -1,6 +1,6 @@
-﻿using CardMod.Content.Slots;
+﻿using System.Collections.Generic;
+using CardMod.Content.Slots;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;

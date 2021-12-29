@@ -1,7 +1,7 @@
-﻿using CardMod.Content.Items.Cards.Boss;
+﻿using System;
+using CardMod.Content.Items.Cards.Boss;
 using CardMod.Content.Items.Cards.Hardmode;
 using CardMod.Content.Items.Cards.PreHardmode;
-using System;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
