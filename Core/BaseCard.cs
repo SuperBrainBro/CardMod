@@ -23,7 +23,7 @@ namespace CardMod.Core
         public sealed override void SetStaticDefaults()
         {
             DisplayName.SetDefault(cardName);
-            Tooltip.SetDefault("Ability:" + cardAbility + Environment.NewLine + cardAbilityDescription);
+            Tooltip.SetDefault("Ability: " + cardAbility + Environment.NewLine + cardAbilityDescription);
         }
 
         public sealed override string Texture
