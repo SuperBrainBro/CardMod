@@ -19,13 +19,13 @@ Allows slowfall and removes fall damage");
             player.noFallDmg = true;
             if (!player.pulley)
             {
-                player.fallStart = (int)(player.position.Y / 16.0);
-                if (player.gravDir == -1.0)
+                player.fallStart = (int)(player.position.Y / 16f);
+                if (player.gravDir == -1f)
                 {
-                    if (player.velocity.Y < -2.0)
+                    if (player.velocity.Y < -2f)
                         player.velocity.Y = -2f;
                 }
-                else if (player.velocity.Y > 2.0)
+                else if (player.velocity.Y > 2f)
                     player.velocity.Y = 2f;
             }
         }

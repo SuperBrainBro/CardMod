@@ -18,7 +18,6 @@ namespace CardMod
         {
             mod = this;
 
-            IL.Terraria.Main.DrawInfernoRings += Main_DrawInfernoRings;
             IL.Terraria.Player.TorchAttack += Player_TorchAttack;
             IL.Terraria.Player.UpdateBuffs += Player_UpdateBuffs;
         }
@@ -27,33 +26,8 @@ namespace CardMod
         {
             mod = null;
 
-            IL.Terraria.Main.DrawInfernoRings -= Main_DrawInfernoRings;
             IL.Terraria.Player.TorchAttack -= Player_TorchAttack;
             IL.Terraria.Player.UpdateBuffs -= Player_UpdateBuffs;
-        }
-
-        private void Main_DrawInfernoRings(ILContext il)
-        {
-            var c = new ILCursor(il);
-
-            if (!c.TryGotoNext(i => i.MatchLdfld(out _)))
-                return;
-            if (!c.TryGotoNext(i => i.MatchLdfld(out _)))
-                return;
-            if (!c.TryGotoNext(i => i.MatchLdfld(out _)))
-                return;
-
-            ILLabel label = null;
-            if (!c.TryGotoNext(i => i.MatchBrfalse(out label)))
-                return;
-
-            c.Index++;
-            c.Emit(OpCodes.Ldsfld, typeof(Main).GetField(nameof(Main.player)));
-            c.Emit(OpCodes.Ldloc_0);
-            c.Emit(OpCodes.Ldelem_Ref);
-            c.Emit(OpCodes.Call, typeof(Player).GetMethod("GetModPlayer", Array.Empty<Type>()).MakeGenericMethod(typeof(CardPlayer)));
-            c.Emit(OpCodes.Ldfld, typeof(CardPlayer).GetField(nameof(CardPlayer._cardWof)));
-            c.Emit(OpCodes.Brtrue, label);
         }
 
         private void Player_TorchAttack(ILContext il)
@@ -79,15 +53,52 @@ namespace CardMod
 
             if (!c.TryGotoNext(i => i.MatchStfld<Player>(nameof(Player.inferno))))
                 return;
-
-            ILLabel bneun = null;
-
-            if (!c.TryGotoPrev(i => i.MatchBneUn(out bneun)))
+            c.Index++;
+            c.Emit(OpCodes.Ldarg_0);
+            c.EmitDelegate<Action<Player>>(player =>
+            {
+                player.Card().infernoLevel += !player.Card().InfernoStrong ? 2f : 0.67f;
+            });
+            if (!c.TryGotoNext(i => i.MatchLdcR4(200f)))
                 return;
             c.Index++;
             c.Emit(OpCodes.Ldarg_0);
-            c.EmitDelegate<Func<Player, bool>>(player => !player.Card()._cardWof);
-            c.Emit(OpCodes.Brfalse, bneun);
+            c.EmitDelegate<Func<Player, float>>(player =>
+            {
+                return player.Card().infernoLevel * 100;
+            });
+            if (!c.TryGotoNext(i => i.MatchLdcI4(60)))
+                return;
+            c.Index++;
+            c.Emit(OpCodes.Ldarg_0);
+            c.EmitDelegate<Func<Player, int>>(player =>
+            {
+                return (int)(90 / player.Card().infernoLevel);
+            });
+            if (!c.TryGotoNext(i => i.MatchLdcI4(10)))
+                return;
+            c.Index++;
+            c.Emit(OpCodes.Ldarg_0);
+            c.EmitDelegate<Func<Player, int>>(player =>
+            {
+                return (int)(player.Card().infernoLevel * MathHelper.SmoothStep(1f, 6.66f, CardUtils.InverseLerp(200f, 50f, player.Card().infernoLevel, true)));
+            });
+            if (!c.TryGotoNext(i => i.MatchLdcI4(120)))
+                return;
+            c.Index++;
+            c.Emit(OpCodes.Ldarg_0);
+            c.EmitDelegate<Func<Player, int>>(player =>
+            {
+                return (int)(40 * player.Card().infernoLevel);
+            });
+            if (!c.TryGotoNext(i => i.MatchLdcI4(120)))
+                return;
+            c.Index++;
+            c.Emit(OpCodes.Ldarg_0);
+            c.EmitDelegate<Func<Player, int>>(player =>
+            {
+                return (int)(40 * player.Card().infernoLevel);
+            });
         }
 
         public override object Call(params object[] args)
