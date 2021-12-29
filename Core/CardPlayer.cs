@@ -15,6 +15,7 @@ namespace CardMod.Core
         public bool _cardWof;
         public bool _cardImp;
         public bool _cardSlime;
+        public bool _cardTim;
 
         public override void ResetEffects()
         {
@@ -23,6 +24,35 @@ namespace CardMod.Core
             _cardWof = false;
             _cardImp = false;
             _cardSlime = false;
+
+            if (_cardTim)
+            {
+                Player.statManaMax2 += 40;
+            }
+                
+        }
+
+        public override void ModifyWeaponCrit(Item item, ref int crit)
+        {
+            if (_cardTim)
+            {
+                if (item.mana >= 1)
+                {
+                    crit += 8;
+                }
+            }
+
+        }
+
+        public override void ModifyWeaponDamage(Item item, ref StatModifier damage, ref float flat)
+        {
+            if (_cardTim)
+            {
+                if (item.mana >= 1)
+                {
+                    damage += 4;
+                }
+            }
         }
 
         public override void UpdateDead()
@@ -87,5 +117,7 @@ namespace CardMod.Core
                 }
             }
         }
+
+
     }
 }
