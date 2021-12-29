@@ -17,7 +17,7 @@ namespace CardMod.Content.Items.Cards.PreHardmode
             for (int i = 0; i < Main.maxNPCs; i++)
             {
                 NPC npc = Main.npc[i];
-                if (npc.active && !npc.friendly && npc.damage > 0 && !npc.dontTakeDamage && player.CanNPCBeHitByPlayerOrPlayerProjectile(npc) && player.wet && npc.Distance(player.Center) < 200f)
+                if (npc.active && !npc.friendly && npc.damage > 0 && !npc.dontTakeDamage && player.CanNPCBeHitByPlayerOrPlayerProjectile(npc) && player.wet && npc.Distance(player.Center) <= 200f)
                 {
                     npc.Card().pinkJellyCard = true;
                 }
@@ -29,6 +29,7 @@ namespace CardMod.Content.Items.Cards.PreHardmode
                     Player player2 = Main.player[playerTargetIndex];
                     if (player2 != player && player.active && !player.dead && player.hostile && (player2.team != player.team || player.team == 0) && Vector2.Distance(player.Center, player.Center) <= 200f)
                     {
+                        player2.Card().pinkJellyCard = true;
                     }
                 }
             }

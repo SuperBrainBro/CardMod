@@ -15,6 +15,9 @@ namespace CardMod.Core
         public bool _cardWof;
         public bool _cardImp;
         public bool _cardSlime;
+        public bool greenJellyCard;
+        public bool pinkJellyCard;
+        public bool blueJellyCard;
 
         public float infernoLevel;
 
@@ -31,6 +34,9 @@ namespace CardMod.Core
             _cardImp = false;
             _cardSlime = false;
             infernoLevel = 0;
+            greenJellyCard = false;
+            pinkJellyCard = false;
+            blueJellyCard = false;
         }
 
         public override void UpdateDead()
@@ -43,10 +49,17 @@ namespace CardMod.Core
             _cardImp = false;
             _cardSlime = false;
             infernoLevel = 0;
+            greenJellyCard = false;
+            pinkJellyCard = false;
+            blueJellyCard = false;
         }
 
         public override void PreUpdate()
         {
+            if (blueJellyCard)
+                Player.statDefense -= 10;
+            if (greenJellyCard)
+                Player.GetDamage(DamageClass.Generic) -= 0.1f;
             if (_goldenSlimeCD > 0)
                 _goldenSlimeCD--;
             if (_volatileCD > 0)
@@ -94,6 +107,19 @@ namespace CardMod.Core
                         }
                     }
                 }
+            }
+        }
+
+        public override void UpdateBadLifeRegen()
+        {
+            if (pinkJellyCard)
+            {
+                if (Player.lifeRegen > 0)
+                {
+                    Player.lifeRegen = 0;
+                }
+                Player.lifeRegenTime = 0;
+                Player.lifeRegen -= 40;
             }
         }
     }
