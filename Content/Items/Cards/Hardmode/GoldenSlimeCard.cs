@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CardMod.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using CardMod.Core;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,16 +11,10 @@ namespace CardMod.Content.Items.Cards.Hardmode
 {
     public class GoldenSlimeCard : BaseCard
     {
-        public GoldenSlimeCard() : base(CardRarity.Legendary)
+        public GoldenSlimeCard() : base(CardRarity.Legendary, "Golden Slime Card", "Money Pants", "Periodically generate a passive income!")
         {
         }
 
-        public override void SetStaticDefaults2()
-        {
-            Tooltip.SetDefault(@"Ability: Golden Pants
-Generates coin every minute
-Money Generated:");
-        }
 
         private int _generated = 0;
 

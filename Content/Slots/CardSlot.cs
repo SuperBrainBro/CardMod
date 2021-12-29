@@ -1,6 +1,5 @@
 ﻿using CardMod.Core;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace CardMod.Content.Slots
@@ -11,7 +10,7 @@ namespace CardMod.Content.Slots
         public override bool DrawDyeSlot => false;
 
         public override string FunctionalBackgroundTexture => "Terraria/Images/Inventory_Back15";
-        public override string FunctionalTexture => "Terraria/Images/Item_" + ItemID.MeteorHamaxe;
+        public override string FunctionalTexture => "CardMod/Assets/Items/Cards/CardSlot";
         public override string DyeBackgroundTexture => "Terraria/Images/Inventory_Back15";
 
         private static bool Acceptable(Item item)

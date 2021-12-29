@@ -1,7 +1,7 @@
-﻿using System;
-using CardMod.Content.Items.Cards.Boss;
+﻿using CardMod.Content.Items.Cards.Boss;
 using CardMod.Content.Items.Cards.Hardmode;
 using CardMod.Content.Items.Cards.PreHardmode;
+using System;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -88,7 +88,7 @@ namespace CardMod.Core
             switch (npc.type)
             {
                 case NPCID.BlueSlime:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<SlimyCard>(), normie));
+                    npcLoot.Add(ItemDropRule.Common(ItemType<BlueSlimeCard>(), normie));
                     break;
                 case NPCID.UmbrellaSlime:
                     npcLoot.Add(ItemDropRule.Common(ItemType<UmbrellaSlimeCard>(), normie));
@@ -135,7 +135,7 @@ namespace CardMod.Core
                     npcLoot.Add(ItemDropRule.Common(ItemType<WallOfFleshCard>(), boss));
                     break;
                 case NPCID.QueenSlimeBoss:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<VolatileCard>(), boss));
+                    npcLoot.Add(ItemDropRule.Common(ItemType<QueenSlimeCard>(), boss));
                     break;
             }
         }

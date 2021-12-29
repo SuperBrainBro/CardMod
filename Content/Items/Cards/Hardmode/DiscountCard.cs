@@ -5,13 +5,9 @@ namespace CardMod.Content.Items.Cards.Hardmode
 {
     public class DiscountCard : BaseCard
     {
-        public DiscountCard() : base(CardRarity.Rare)
+        public DiscountCard() : base(CardRarity.Rare, "Rewards Card", "DISCOUNT", "Shops prices are reduced.")
         {
         }
-
-        public override void SetStaticDefaults2() => Tooltip.SetDefault(@"Ability: Discount
-Shops prices lowered by 10%
-Stackable with Discount Card");
 
         public override void SafeSetDefaults() => isCard = true;
 

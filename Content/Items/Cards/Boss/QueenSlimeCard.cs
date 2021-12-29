@@ -5,15 +5,12 @@ using Terraria.ID;
 
 namespace CardMod.Content.Items.Cards.Boss
 {
-    public class VolatileCard : BaseCard
+    public class QueenSlimeCard : BaseCard
     {
-        public VolatileCard() : base(CardRarity.Epic)
+        public QueenSlimeCard() : base(CardRarity.Epic, "Queen Slime Card", "Volatile Bloons", "You project volatile ballons periodically while moving.")
         {
         }
 
-        public override void SetStaticDefaults2() => Tooltip.SetDefault(@"Ability: Volatile
-When moving, every 2.5 seconds will
-shoot 8 volatile balloons");
 
         public override void SafeSetDefaults() => isCard = true;
 

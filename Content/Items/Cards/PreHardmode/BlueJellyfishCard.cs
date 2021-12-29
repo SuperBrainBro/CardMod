@@ -6,16 +6,8 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class BlueJellyfishCard : BaseCard
     {
-        public BlueJellyfishCard() : base(CardRarity.Common)
+        public BlueJellyfishCard() : base(CardRarity.Common, "Blue Jellyfish Card", "Jelly Defense", "While in water, nearby enemies have less defense.")
         {
-        }
-
-        public override void SetStaticDefaults2()
-        {
-            Tooltip.SetDefault(@"Ability: Electro Jelly Defense
-While in water, enemies nearby have less defense
-If enemy defense is zero or lower, it will take
-more damage instead of normal damage value");
         }
 
         public override void SafeSetDefaults() => isCard = true;

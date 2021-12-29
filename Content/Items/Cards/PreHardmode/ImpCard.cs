@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using CardMod.Core;
+﻿using CardMod.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -13,19 +13,10 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class ImpCard : BaseCard
     {
-        public ImpCard() : base(CardRarity.Uncommon)
+        public ImpCard() : base(CardRarity.Uncommon, "Imp Card", "Weak Inferno", "Gives you weak inferno rings, which ignite enemies around you.")
         {
         }
 
-        public override void SetStaticDefaults2()
-        {
-            DisplayName.SetDefault("Imp Card");
-            Tooltip.SetDefault(@"Ability: Weak Inferno
-Makes you to have inferno rings that
-ignite enemies on fire around you
-WARNING: vanilla inferno rings will
-override rings from this card");
-        }
 
         public override void SafeSetDefaults() => isCard = true;
 

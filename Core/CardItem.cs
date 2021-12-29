@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using CardMod.Content.Slots;
+﻿using CardMod.Content.Slots;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -33,6 +33,8 @@ namespace CardMod.Core
             Item.height = 24;
             SafeSetDefaults();
             SetDefaults2();
+
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public virtual void SafeSetDefaults()

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
@@ -7,18 +8,22 @@ namespace CardMod.Core
 {
     public abstract class BaseCard : CardItem
     {
-        protected BaseCard(int cardRarity = CardRarity.Common) : base(cardRarity)
+        public BaseCard(int cardRarity = CardRarity.Common, string name = "Base Card", string ability = "Ability", string abilityDescription = "Description") : base(cardRarity)
         {
+            cardName = name;
+            cardAbility = ability + "!";
+            cardAbilityDescription = abilityDescription;
         }
+
+        public string cardName;
+        public string cardAbility;
+        public string cardAbilityDescription;
+
 
         public sealed override void SetStaticDefaults()
         {
-            SetStaticDefaults2();
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-        }
-
-        public virtual void SetStaticDefaults2()
-        {
+            DisplayName.SetDefault(cardName);
+            Tooltip.SetDefault("Ability: " + cardAbility + Environment.NewLine + cardAbilityDescription);
         }
 
         public sealed override string Texture

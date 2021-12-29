@@ -6,17 +6,10 @@ namespace CardMod.Content.Items.Cards.Hardmode
 {
     public class GreenJellyfishCard : BaseCard
     {
-        public GreenJellyfishCard() : base(CardRarity.Uncommon)
+        public GreenJellyfishCard() : base(CardRarity.Uncommon, "Green Jellyfish Card", "Jelly Weakness", "While in water, enemies nearby have less damage.")
         {
         }
 
-        public override void SetStaticDefaults2()
-        {
-            Tooltip.SetDefault(@"Ability: Electro Jelly Damage
-While in water, enemies nearby have less damage
-If enemy damage is zero or lower, enemy damage
-will be set to one point");
-        }
 
         public override void SafeSetDefaults() => isCard = true;
 

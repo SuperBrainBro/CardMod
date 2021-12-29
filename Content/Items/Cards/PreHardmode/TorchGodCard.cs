@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using CardMod.Core;
+﻿using CardMod.Core;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,15 +9,10 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class TorchGodCard : BaseCard
     {
-        public TorchGodCard() : base(CardRarity.Uncommon)
+        public TorchGodCard() : base(CardRarity.Uncommon, "Torch God Card", "The Torch", "Infinite light emition.")
         {
         }
 
-        public override void SetStaticDefaults2() => Tooltip.SetDefault(@"'God himself held this card'
-Ability: The Torch
-You able to emit torch - like light!
-Light will change depending in
-what biome you are.");
 
         public override void SafeSetDefaults() => isCard = true;
 

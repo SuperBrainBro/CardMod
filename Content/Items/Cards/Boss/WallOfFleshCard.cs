@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using CardMod.Core;
+﻿using CardMod.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -13,20 +13,10 @@ namespace CardMod.Content.Items.Cards.Boss
 {
     public class WallOfFleshCard : BaseCard
     {
-        public WallOfFleshCard() : base(CardRarity.Epic)
+        public WallOfFleshCard() : base(CardRarity.Epic, "Wall of Flesh Card", "Strong Inferno", "Gives you strong inferno rings, which ignite enemies around you..")
         {
         }
 
-        public override void SetStaticDefaults2()
-        {
-            DisplayName.SetDefault("Inferno Card");
-            Tooltip.SetDefault(@"Ability: Strong Inferno
-Makes you to have inferno rings that
-ignite enemies on fire around you
-You also get some life regeneration
-WARNING: this card will override
-rings from inferno potion");
-        }
 
         public override void SafeSetDefaults() => isCard = true;
 
