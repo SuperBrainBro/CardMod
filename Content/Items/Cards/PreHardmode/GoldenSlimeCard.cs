@@ -7,7 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace CardMod.Content.Items.Cards.Hardmode
+namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class GoldenSlimeCard : BaseCard
     {
@@ -26,7 +26,7 @@ namespace CardMod.Content.Items.Cards.Hardmode
 
         public override void SafeModifyTooltips(ref List<TooltipLine> tooltips)
         {
-            TooltipLine index = tooltips.Find(x => x.mod == Mod.Name && x.Name == "Tooltip2");
+            TooltipLine index = tooltips.Find(x => x.mod == Mod.Name && x.text.StartsWith("Money Generated:"));
 
             if (index != null)
             {
@@ -59,12 +59,20 @@ namespace CardMod.Content.Items.Cards.Hardmode
 
         public override void CardEffects(Player player, bool hideVisuals)
         {
+            float value = 0;
+            if (_generated > 0)
+                value = MathF.Sqrt(1 / 8 * _generated) / 100;
+
             if (player.Card()._goldenSlimeCD == 0)
             {
                 _generated++;
-                player.QuickSpawnItem(ItemID.CopperCoin);
-                player.Card()._goldenSlimeCD = 3600;
+                player.QuickSpawnItem(ItemID.GoldCoin);
+                player.Card()._goldenSlimeCD = 1;
+                Main.NewText(value * 100);
+                Mod.Logger.Debug(value * 100);
             }
+
+            player.moveSpeed -= value;
         }
 
         public override void SaveData(TagCompound tag) => tag["generatedCoins"] = _generated;
