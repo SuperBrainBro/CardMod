@@ -6,7 +6,10 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class BlueJellyfishCard : BaseCard
     {
-        public BlueJellyfishCard() : base(CardRarity.Common, "Blue Jellyfish Card", "Jelly Defense", "While in water, nearby enemies have less defense")
+        public BlueJellyfishCard() : base(CardRarity.Common,
+            "Blue Jellyfish Card",
+            "Jelly Defense",
+                "While in water, nearby enemies have less defense")
         {
         }
 

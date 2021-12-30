@@ -11,8 +11,11 @@ namespace CardMod.Content.Items.Cards.Hardmode
 {
     public class GoldenSlimeCard : BaseCard
     {
-        public GoldenSlimeCard() : base(CardRarity.Legendary, "Golden Slime Card", "Money Pants", "Periodically generate a passive income!" +
-            "\nMoney Generated:")
+        public GoldenSlimeCard() : base(CardRarity.Legendary,
+            "Golden Slime Card",
+            "Money Pants",
+                "Periodically generate a passive income!",
+            "The more money you have, the slower you move")
         {
         }
 

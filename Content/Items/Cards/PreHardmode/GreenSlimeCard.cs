@@ -5,7 +5,10 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class GreenSlimeCard : BaseCard
     {
-        public GreenSlimeCard() : base(CardRarity.Common, "Green Slime Card", "Contact Slowness", "Inflicts slowness to enemies upon contact")
+        public GreenSlimeCard() : base(CardRarity.Common,
+            "Green Slime Card",
+            "Contact Slowness",
+                "Inflicts slowness to enemies upon contact")
         {
         }
 

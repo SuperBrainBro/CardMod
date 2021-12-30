@@ -6,7 +6,10 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class PinkJellyfishCard : BaseCard
     {
-        public PinkJellyfishCard() : base(CardRarity.Common, "Pink Jellyfish Card", "Jelly Regen", "While in water, enemies nearby have less life regeneration")
+        public PinkJellyfishCard() : base(CardRarity.Common,
+            "Pink Jellyfish Card",
+            "Jelly Regen",
+                "While in water, enemies nearby have less life regeneration")
         {
         }
 

@@ -87,6 +87,9 @@ namespace CardMod.Core
 
             switch (npc.type)
             {
+                case NPCID.GreenSlime:
+                    npcLoot.Add(ItemDropRule.Common(ItemType<GreenSlimeCard>(), normie));
+                    break;
                 case NPCID.BlueSlime:
                     npcLoot.Add(ItemDropRule.Common(ItemType<BlueSlimeCard>(), normie));
                     break;

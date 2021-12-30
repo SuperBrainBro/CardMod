@@ -10,7 +10,7 @@ namespace CardMod.Content.Items.Cards.PreHardmode
         public TorchGodCard() : base(CardRarity.Uncommon,
             "Torch God Card",
             "The Torch",
-            "Infinite light emition",
+                "Infinite light emition",
             "You can no longer place torches")
         {
         }

@@ -7,7 +7,10 @@ namespace CardMod.Content.Items.Cards.Boss
 {
     public class QueenSlimeCard : BaseCard
     {
-        public QueenSlimeCard() : base(CardRarity.Epic, "Queen Slime Card", "Volatile Bloons", "You project volatile ballons periodically while moving")
+        public QueenSlimeCard() : base(CardRarity.Epic,
+            "Queen Slime Card",
+            "Volatile Bloons",
+                "You project volatile ballons periodically while moving")
         {
         }
 

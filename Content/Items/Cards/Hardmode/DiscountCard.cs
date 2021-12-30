@@ -5,7 +5,10 @@ namespace CardMod.Content.Items.Cards.Hardmode
 {
     public class DiscountCard : BaseCard
     {
-        public DiscountCard() : base(CardRarity.Rare, "Rewards Card", "DISCOUNT", "Shops prices are reduced")
+        public DiscountCard() : base(CardRarity.Rare,
+            "Rewards Card",
+            "DISCOUNT",
+                "Shops prices are reduced")
         {
         }
 

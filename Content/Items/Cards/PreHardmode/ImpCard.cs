@@ -12,8 +12,10 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class ImpCard : BaseCard
     {
-        public ImpCard() : base(CardRarity.Uncommon, "Imp Card", "Weak Inferno", "Gives you weak inferno rings," +
-            "\nwhich ignite enemies around you")
+        public ImpCard() : base(CardRarity.Uncommon, "Imp Card",
+            "Weak Inferno",
+                "Gives you weak inferno rings," +
+              "\nwhich ignite enemies around you")
         {
         }
 
