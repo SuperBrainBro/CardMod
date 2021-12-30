@@ -88,7 +88,7 @@ namespace CardMod.Content.Items.Cards.Boss
                            player.Center - Main.screenPosition,
                            new Rectangle(0, 400 * j, 400, 400),
                            Color.Lerp(new Color(num5, num5, num5, num5 / 2f),
-                                j == 0 ? Color.Crimson : (j == 1 ? Color.Lerp(Color.Crimson, Color.Gold, 0.5f) : Color.Gold),
+                                j == 0 ? Color.Crimson : (j == 1 ? Color.Lerp(Color.Crimson, Color.Gold, num5 / 2f) : Color.Gold),
                                 num5 / (j + 1)),
                            player.flameRingRot + 1.04719758f * j,
                            new Vector2(200f, 200f),

@@ -15,7 +15,7 @@ namespace CardMod.Content.Slots
 
         private static bool Acceptable(Item item)
         {
-            CardItem card = item.ModItem as CardItem;
+            BaseCard card = item.ModItem as BaseCard;
             return card.isCard || item.GetGlobalItem<CardGlobalItem>().isCard;
         }
 

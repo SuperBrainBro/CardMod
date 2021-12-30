@@ -7,7 +7,11 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 {
     public class TorchGodCard : BaseCard
     {
-        public TorchGodCard() : base(CardRarity.Uncommon, "Torch God Card", "The Torch", "Infinite light emition")
+        public TorchGodCard() : base(CardRarity.Uncommon,
+            "Torch God Card",
+            "The Torch",
+            "Infinite light emition",
+            "You can no longer place torches")
         {
         }
 
@@ -36,6 +40,7 @@ namespace CardMod.Content.Items.Cards.PreHardmode
             TorchID.TorchColor(style, out float R, out float G, out float B);
 
             Lighting.AddLight(player.Center, new Vector3(R, G, B));
+            player.Card()._cardTorchGod = true;
         }
     }
 }

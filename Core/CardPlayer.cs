@@ -16,8 +16,12 @@ namespace CardMod.Core
         public bool _cardImp;
         public bool _cardSlime;
         public bool greenJellyCard;
+        public bool greenJellyCardImmune;
         public bool pinkJellyCard;
+        public bool pinkJellyCardImmune;
         public bool blueJellyCard;
+        public bool blueJellyCardImmune;
+        public bool _cardTorchGod;
 
         public float infernoLevel;
 
@@ -35,8 +39,12 @@ namespace CardMod.Core
             _cardSlime = false;
             infernoLevel = 0;
             greenJellyCard = false;
+            greenJellyCardImmune = false;
             pinkJellyCard = false;
+            pinkJellyCardImmune = false;
             blueJellyCard = false;
+            blueJellyCardImmune = false;
+            _cardTorchGod = false;
         }
 
         public override void UpdateDead()
@@ -50,12 +58,23 @@ namespace CardMod.Core
             _cardSlime = false;
             infernoLevel = 0;
             greenJellyCard = false;
+            greenJellyCardImmune = false;
             pinkJellyCard = false;
+            pinkJellyCardImmune = false;
             blueJellyCard = false;
+            blueJellyCardImmune = false;
+            _cardTorchGod = false;
         }
 
         public override void PreUpdate()
         {
+            if (greenJellyCardImmune)
+                greenJellyCard = false;
+            if (pinkJellyCardImmune)
+                pinkJellyCard = false;
+            if (blueJellyCardImmune)
+                blueJellyCard = false;
+
             if (blueJellyCard)
                 Player.statDefense -= 10;
             if (greenJellyCard)

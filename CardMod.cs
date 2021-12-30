@@ -69,69 +69,115 @@ namespace CardMod
                 if (args[0] is string)
                 {
                     string callType = (args[0] as string).ToLower();
-                    switch (callType)
+                    if (args[1] is NPC npc)
                     {
-                        case "bluejellyimmune":
-                            {
-                                NPC npc = args[1] is NPC ? args[1] as NPC : null;
-                                if (npc is null)
+                        if (npc is null)
+                        {
+                            mod.Logger.Error("Second argument should be NPC!");
+                            return null;
+                        }
+
+                        switch (callType)
+                        {
+                            case "bluejellyimmune":
                                 {
-                                    mod.Logger.Error("Second argument should be NPC!");
-                                    return null;
+                                    switch (args[2])
+                                    {
+                                        case bool boolean:
+                                            npc.Card().jellyBlueImmune = boolean;
+                                            return true;
+                                        default:
+                                            mod.Logger.Error("Third argument should be boolean!");
+                                            break;
+                                    }
+                                    return false;
                                 }
-                                switch (args[2])
+                            case "pinkjellyimmune":
                                 {
-                                    case bool boolean:
-                                        npc.Card().jellyBlueImmune = boolean;
-                                        return true;
-                                    default:
-                                        mod.Logger.Error("Third argument should be boolean!");
-                                        break;
+                                    switch (args[2])
+                                    {
+                                        case bool boolean:
+                                            npc.Card().jellyPinkImmune = boolean;
+                                            return true;
+                                        default:
+                                            mod.Logger.Error("Third argument should be boolean!");
+                                            break;
+                                    }
+                                    return false;
                                 }
+                            case "greenjellyimmune":
+                                {
+                                    switch (args[2])
+                                    {
+                                        case bool boolean:
+                                            npc.Card().jellyGreenImmune = boolean;
+                                            return true;
+                                        default:
+                                            mod.Logger.Error("Third argument should be boolean!");
+                                            break;
+                                    }
+                                    return false;
+                                }
+                            default:
+                                mod.Logger.Error("Unknown first argument!");
                                 return false;
-                            }
-                        case "pinkjellyimmune":
-                            {
-                                NPC npc = args[1] is NPC ? args[1] as NPC : null;
-                                if (npc is null)
-                                {
-                                    mod.Logger.Error("Second argument should be NPC!");
-                                    return null;
-                                }
-                                switch (args[2])
-                                {
-                                    case bool boolean:
-                                        npc.Card().jellyPinkImmune = boolean;
-                                        return true;
-                                    default:
-                                        mod.Logger.Error("Third argument should be boolean!");
-                                        break;
-                                }
-                                return false;
-                            }
-                        case "greenjellyimmune":
-                            {
-                                NPC npc = args[1] is NPC ? args[1] as NPC : null;
-                                if (npc is null)
-                                {
-                                    mod.Logger.Error("Second argument should be NPC!");
-                                    return null;
-                                }
-                                switch (args[2])
-                                {
-                                    case bool boolean:
-                                        npc.Card().jellyGreenImmune = boolean;
-                                        return true;
-                                    default:
-                                        mod.Logger.Error("Third argument should be boolean!");
-                                        break;
-                                }
-                                return false;
-                            }
-                        default:
-                            mod.Logger.Error("Unknown first argument!");
-                            return false;
+                        }
                     }
+                    else if (args[1] is Player || args[1] is int)
+                    {
+                        Player player = args[1] is int @int ? Main.player[@int] : args[1] as Player;
+                        if (player is null)
+                        {
+                            mod.Logger.Error("Second argument should be Player!");
+                            return null;
+                        }
+                        switch (callType)
+                        {
+                            case "bluejellyimmune":
+                                {
+                                    switch (args[2])
+                                    {
+                                        case bool boolean:
+                                            player.Card().blueJellyCardImmune = boolean;
+                                            return true;
+                                        default:
+                                            mod.Logger.Error("Third argument should be boolean!");
+                                            break;
+                                    }
+                                    return false;
+                                }
+                            case "greenjellyimmune":
+                                {
+                                    switch (args[2])
+                                    {
+                                        case bool boolean:
+                                            player.Card().greenJellyCardImmune = boolean;
+                                            return true;
+                                        default:
+                                            mod.Logger.Error("Third argument should be boolean!");
+                                            break;
+                                    }
+                                    return false;
+                                }
+                            case "pinkjellyimmune":
+                                {
+                                    switch (args[2])
+                                    {
+                                        case bool boolean:
+                                            player.Card().pinkJellyCardImmune = boolean;
+                                            return true;
+                                        default:
+                                            mod.Logger.Error("Third argument should be boolean!");
+                                            break;
+                                    }
+                                    return false;
+                                }
+                            default:
+                                mod.Logger.Error("Unknown first argument!");
+                                return false;
+                        }
+                    }
+                    return null;
                 }
                 else
                 {

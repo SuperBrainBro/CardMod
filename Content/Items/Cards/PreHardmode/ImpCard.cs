@@ -82,10 +82,15 @@ namespace CardMod.Content.Items.Cards.PreHardmode
                         num4 -= num2 * 2f;
                     }
                     float num5 = MathHelper.Lerp(0.8f, 0f, Math.Abs(num + num2 * j - num3) * 10f);
+                    
+                    Color color = Color.Lerp(Color.Yellow, Color.LightYellow, 0.86f);
                     Main.spriteBatch.Draw(TextureAssets.FlameRing.Value,
                            player.Center - Main.screenPosition,
                            new Rectangle(0, 400 * j, 400, 400),
-                           Color.Lerp(new Color(num5, num5, num5, num5 / 2f), Color.White, num5 / 2f),
+                           //Color.Lerp(new Color(num5, num5, num5, num5 / 2f), Color.White, num5 / 2f),
+                           Color.Lerp(new Color(num5, num5, num5, num5 / 2f),
+                                j == 0 ? color : (j == 1 ? Color.Lerp(color, Color.White, num5 / 2f) : Color.White),
+                                num5 / (j + 1)),
                            player.flameRingRot + 1.04719758f * j,
                            new Vector2(200f, 200f),
                            num4 * 0.75f,

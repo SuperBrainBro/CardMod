@@ -131,12 +131,67 @@ namespace CardMod.Core
                     npcLoot.Add(ItemDropRule.Common(ItemType<DiscountCard>(), normie));
                     break;
 
+                case NPCID.EaterofWorldsHead:
+                    npcLoot.Add(ItemDropRule.ByCondition(new Conditions.EOWHeadLast(), ItemType<EaterOfWorldsCard>(), boss));
+                    break;
+                case NPCID.EaterofWorldsBody:
+                    npcLoot.Add(ItemDropRule.ByCondition(new Conditions.EOWBodyLast(), ItemType<EaterOfWorldsCard>(), boss));
+                    break;
+                case NPCID.EaterofWorldsTail:
+                    npcLoot.Add(ItemDropRule.ByCondition(new Conditions.EOWTailLast(), ItemType<EaterOfWorldsCard>(), boss));
+                    break;
                 case NPCID.WallofFlesh:
                     npcLoot.Add(ItemDropRule.Common(ItemType<WallOfFleshCard>(), boss));
                     break;
                 case NPCID.QueenSlimeBoss:
                     npcLoot.Add(ItemDropRule.Common(ItemType<QueenSlimeCard>(), boss));
                     break;
+            }
+        }
+
+        public static class Conditions
+        {
+            public class EOWHeadLast : IItemDropRuleCondition, IProvideItemConditionDescription
+            {
+                public bool CanDrop(DropAttemptInfo info)
+                {
+                    bool head = NPC.CountNPCS(NPCID.EaterofWorldsHead) == 1;
+                    bool body = NPC.CountNPCS(NPCID.EaterofWorldsBody) == 0;
+                    bool tail = NPC.CountNPCS(NPCID.EaterofWorldsTail) == 0;
+                    return head && body && tail;
+                }
+
+                public bool CanShowItemDropInUI() => true;
+
+                public string GetConditionDescription() => null;
+            }
+            public class EOWBodyLast : IItemDropRuleCondition, IProvideItemConditionDescription
+            {
+                public bool CanDrop(DropAttemptInfo info)
+                {
+                    bool head = NPC.CountNPCS(NPCID.EaterofWorldsHead) == 0;
+                    bool body = NPC.CountNPCS(NPCID.EaterofWorldsBody) == 1;
+                    bool tail = NPC.CountNPCS(NPCID.EaterofWorldsTail) == 0;
+                    return head && body && tail;
+                }
+
+                public bool CanShowItemDropInUI() => true;
+
+                public string GetConditionDescription() => null;
+            }
+            public class EOWTailLast : IItemDropRuleCondition, IProvideItemConditionDescription
+            {
+                public bool CanDrop(DropAttemptInfo info)
+                {
+                    bool head = NPC.CountNPCS(NPCID.EaterofWorldsHead) == 0;
+                    bool body = NPC.CountNPCS(NPCID.EaterofWorldsBody) == 0;
+                    bool tail = NPC.CountNPCS(NPCID.EaterofWorldsTail) == 1;
+                    return head && body && tail;
+                }
+
+                public bool CanShowItemDropInUI() => true;
+
+                public string GetConditionDescription() => null;
             }
         }
     }
