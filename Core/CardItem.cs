@@ -5,14 +5,14 @@ using Terraria.ModLoader.IO;
 
 namespace CardMod.Core
 {
-    public class CardGlobalItem : GlobalItem
+    public class CardItem : GlobalItem
     {
         public bool isCard = false;
 
         public override bool InstancePerEntity => true;
         public override GlobalItem Clone(Item item, Item itemClone)
         {
-            CardGlobalItem myClone = (CardGlobalItem)base.Clone(item, itemClone);
+            CardItem myClone = (CardItem)base.Clone(item, itemClone);
             myClone.isCard = isCard;
             return myClone;
         }

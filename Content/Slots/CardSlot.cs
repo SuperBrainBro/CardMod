@@ -16,7 +16,7 @@ namespace CardMod.Content.Slots
         private static bool Acceptable(Item item)
         {
             BaseCard card = item.ModItem as BaseCard;
-            return card.isCard || item.GetGlobalItem<CardGlobalItem>().isCard;
+            return card.isCard || item.GetGlobalItem<CardItem>().isCard;
         }
 
         public override bool CanAcceptItem(Item checkItem, AccessorySlotType context) => Acceptable(checkItem);

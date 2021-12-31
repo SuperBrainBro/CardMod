@@ -68,8 +68,8 @@ namespace CardMod.Content.Items.Cards.PreHardmode
                 _generated++;
                 player.QuickSpawnItem(ItemID.GoldCoin);
                 player.Card()._goldenSlimeCD = 1;
-                Main.NewText(value * 100);
-                Mod.Logger.Debug(value * 100);
+                //Main.NewText(value * 100);
+                //Mod.Logger.Debug(value * 100);
             }
 
             player.moveSpeed -= value;

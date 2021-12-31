@@ -18,6 +18,8 @@ namespace CardMod.Core
         public bool jellyBlueImmune;
         public bool jellyPinkImmune;
         public bool jellyGreenImmune;
+        public bool onFireDemon;
+        public bool onFireDevil;
 
         public override bool InstancePerEntity => true;
         public override bool CloneNewInstances => true;
@@ -27,6 +29,8 @@ namespace CardMod.Core
             clone.jellyBlueImmune = jellyBlueImmune;
             clone.jellyGreenImmune = jellyGreenImmune;
             clone.jellyPinkImmune = jellyPinkImmune;
+            clone.onFireDemon = onFireDemon;
+            clone.onFireDevil = onFireDevil;
             return clone;
         }
 
@@ -63,6 +67,23 @@ namespace CardMod.Core
                     damage = 5;
                 }
             }
+            if (onFireDevil || onFireDemon)
+            {
+                if (npc.lifeRegen > 0)
+                {
+                    npc.lifeRegen = 0;
+                }
+                npc.lifeRegen = 0;
+                int value = 0;
+                if (onFireDemon)
+                    value += 50;
+                if (onFireDevil)
+                    value += 250;
+                if (damage < value)
+                {
+                    damage = value;
+                }
+            }
         }
 
         public override void OnHitPlayer(NPC npc, Player target, int damage, bool crit)
@@ -73,9 +94,15 @@ namespace CardMod.Core
 
         public override void SetupShop(int type, Chest shop, ref int nextSlot)
         {
+            Player player = Main.LocalPlayer;
             foreach (Item item in shop.item)
             {
-                float mult = Main.LocalPlayer.Card()._cardDiscount ? 0.9f : 1f;
+                float mult = 1f;
+                if (player.Card()._cardDiscount)
+                    mult -= 0.1f;
+                if (player.Card()._cardBird)
+                    mult += 0.1f;
+
                 item.value = (int)Math.Round(item.value * mult);
             }
         }
@@ -85,8 +112,25 @@ namespace CardMod.Core
             const int normie = 200;
             const int boss = 100;
 
+            if (npc.SpawnedFromStatue)
+                return;
             switch (npc.type)
             {
+                case NPCID.Bunny:
+                case NPCID.BunnySlimed:
+                case NPCID.BunnyXmas:
+                case NPCID.PartyBunny:
+                    npcLoot.Add(ItemDropRule.Common(ItemType<BunnyCard>(), normie));
+                    break;
+                case NPCID.Squirrel:
+                case NPCID.SquirrelRed:
+                    npcLoot.Add(ItemDropRule.Common(ItemType<SquirrelCard>(), normie));
+                    break;
+                case NPCID.Bird:
+                case NPCID.BirdBlue:
+                case NPCID.BirdRed:
+                    npcLoot.Add(ItemDropRule.Common(ItemType<BirdCard>(), normie));
+                    break;
                 case NPCID.GreenSlime:
                     npcLoot.Add(ItemDropRule.Common(ItemType<GreenSlimeCard>(), normie));
                     break;
@@ -111,6 +155,9 @@ namespace CardMod.Core
                 case NPCID.FireImp:
                     npcLoot.Add(ItemDropRule.Common(ItemType<ImpCard>(), normie));
                     break;
+                case NPCID.Demon:
+                    npcLoot.Add(ItemDropRule.Common(ItemType<DemonCard>(), normie));
+                    break;
 
                 case NPCID.GreenJellyfish:
                     npcLoot.Add(ItemDropRule.Common(ItemType<GreenJellyfishCard>(), normie));
@@ -132,6 +179,9 @@ namespace CardMod.Core
                     break;
                 case NPCID.PirateShip:
                     npcLoot.Add(ItemDropRule.Common(ItemType<DiscountCard>(), normie));
+                    break;
+                case NPCID.RedDevil:
+                    npcLoot.Add(ItemDropRule.Common(ItemType<RedDevilCard>(), normie));
                     break;
 
                 case NPCID.EaterofWorldsHead:

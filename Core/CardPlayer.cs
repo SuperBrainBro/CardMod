@@ -22,6 +22,11 @@ namespace CardMod.Core
         public bool blueJellyCard;
         public bool blueJellyCardImmune;
         public bool _cardTorchGod;
+        public bool _cardBird;
+        public bool _cardDemon;
+        public bool _cardRedDevil;
+        public bool onFireDemon;
+        public bool onFireDevil;
 
         public float infernoLevel;
 
@@ -45,6 +50,9 @@ namespace CardMod.Core
             blueJellyCard = false;
             blueJellyCardImmune = false;
             _cardTorchGod = false;
+            _cardBird = false;
+            _cardDemon = false;
+            _cardRedDevil = false;
         }
 
         public override void UpdateDead()
@@ -64,6 +72,11 @@ namespace CardMod.Core
             blueJellyCard = false;
             blueJellyCardImmune = false;
             _cardTorchGod = false;
+            _cardBird = false;
+            _cardDemon = false;
+            _cardRedDevil = false;
+            onFireDemon = false;
+            onFireDevil = false;
         }
 
         public override void PreUpdate()
@@ -139,6 +152,24 @@ namespace CardMod.Core
                 }
                 Player.lifeRegenTime = 0;
                 Player.lifeRegen -= 40;
+            }
+            if ((_cardDemon || _cardRedDevil || onFireDevil || onFireDemon) && Player.wet)
+            {
+                if (Player.lifeRegen > 0)
+                {
+                    Player.lifeRegen = 0;
+                }
+                Player.lifeRegenTime = 0;
+                int value = 0;
+                if (_cardDemon)
+                    value += 20;
+                if (onFireDemon)
+                    value += 20;
+                if (_cardRedDevil)
+                    value += 80;
+                if (onFireDevil)
+                    value += 80;
+                Player.lifeRegen -= value;
             }
         }
     }
