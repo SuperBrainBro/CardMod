@@ -15,6 +15,7 @@ namespace CardMod.Content.Items.Cards.PreHardmode
         {
         }
 
+        public override bool CanBeBoughtFromCardNPC() => false;
 
         public override void SafeSetDefaults() => isCard = true;
 

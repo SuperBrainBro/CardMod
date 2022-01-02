@@ -24,12 +24,14 @@ namespace CardMod.Core
             cardWeakness = weakness;
         }
 
-        protected int cardRarity;
+        public int cardRarity;
         public bool isCard;
         public string cardName;
         public string cardAbility;
         public string cardAbilityDescription;
         public string cardWeakness;
+
+        public virtual bool CanBeBoughtFromCardNPC() => true;
 
         public override ModItem Clone(Item item)
         {
@@ -102,12 +104,12 @@ namespace CardMod.Core
             TooltipLine abilityLine = tooltips.Find(x => x.mod == Mod.Name && x.text.StartsWith("Ability:"));
             if (abilityLine != null)
             {
-                abilityLine.overrideColor = ModContent.GetInstance<CardMod.Rarities.Legendary>().RarityColor * alpha;
+                abilityLine.overrideColor = ModContent.GetInstance<CardMod.Rarities.Legendary>().RarityColor;
             }
             abilityLine = tooltips.Find(x => x.mod == Mod.Name && x.text.StartsWith("Weakness:"));
             if (abilityLine != null)
             {
-                abilityLine.overrideColor = new Color(255, 101, 85) * alpha;
+                abilityLine.overrideColor = new Color(255, 101, 85);
             }
 
             if ((Item.tooltipContext == 0 || Item.tooltipContext == 2 || Item.tooltipContext == 1 || Item.tooltipContext == 3 || (Item.tooltipContext == 4 || Item.tooltipContext == 15) ? 1 : (Item.tooltipContext == 6 ? 1 : 0)) != 0 && Main.LocalPlayer.difficulty == 3 && CreativeItemSacrificesCatalog.Instance.TryGetSacrificeCountCapToUnlockInfiniteItems(Item.type, out int amountNeeded))

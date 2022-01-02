@@ -17,9 +17,6 @@ namespace CardMod.Content.Items.Cards.Hardmode
 
         public override void SafeSetDefaults() => isCard = true;
 
-        public override void CardEffects(Player player, bool hideVisuals)
-        {
-            player.Card()._cardRedDevil = true;
-        }
+        public override void CardEffects(Player player, bool hideVisuals) => player.Card()._cardRedDevil = true;
     }
 }

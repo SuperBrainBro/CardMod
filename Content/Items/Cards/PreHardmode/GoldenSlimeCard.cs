@@ -19,7 +19,6 @@ namespace CardMod.Content.Items.Cards.PreHardmode
         {
         }
 
-
         private int _generated = 0;
 
         public override void SafeSetDefaults() => isCard = true;
@@ -32,21 +31,13 @@ namespace CardMod.Content.Items.Cards.PreHardmode
             {
                 string displayValue = " ";
 
-                if (_generated > 1000000)
-                {
-                    displayValue += (((Math.Abs(_generated) % 100000000) - (Math.Abs(_generated) % 1000000)) / 1000000) + $" platinum, ";
-                }
-                if (_generated > 10000)
-                {
-                    displayValue += (((Math.Abs(_generated) % 1000000) - (Math.Abs(_generated) % 10000)) / 10000) + $" gold, ";
-                }
                 if (_generated > 100)
                 {
-                    displayValue += (((Math.Abs(_generated) % 10000) - (Math.Abs(_generated) % 100)) / 100) + $" silver, and ";
+                    displayValue += (((Math.Abs(_generated) % 10000) - (Math.Abs(_generated) % 100)) / 100) + $" platinum, and ";
                 }
                 if (_generated > 1)
                 {
-                    displayValue += Math.Abs(_generated) % 100 + $" copper coins";
+                    displayValue += Math.Abs(_generated) % 100 + $" gold coins";
                 }
                 else
                 {
@@ -59,17 +50,16 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 
         public override void CardEffects(Player player, bool hideVisuals)
         {
-            float value = 0;
+            float value = 0f;
             if (_generated > 0)
-                value = MathF.Sqrt(1 / 8 * _generated) / 100;
+                value = MathF.Sqrt(1 / 8 * _generated) / 50;
 
             if (player.Card()._goldenSlimeCD == 0)
             {
                 _generated++;
                 player.QuickSpawnItem(ItemID.GoldCoin);
-                player.Card()._goldenSlimeCD = 1;
-                //Main.NewText(value * 100);
-                //Mod.Logger.Debug(value * 100);
+                player.Card()._goldenSlimeCD = 3600;
+                Main.NewText(value * 100);
             }
 
             player.moveSpeed -= value;
