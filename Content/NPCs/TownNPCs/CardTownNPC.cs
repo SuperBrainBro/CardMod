@@ -105,15 +105,12 @@ namespace CardMod.Content.NPCs.TownNPCs
         {
             List<int> sellableItems = GetSellableItems();
             int i = 0;
-            int startOffset = shopNum * 40;
-            const int maxShop = 40;
-
             foreach (int type in sellableItems)
             {
-                if (++i < startOffset)
+                if (++i < shopNum * 40)
                     continue;
 
-                if (nextSlot >= maxShop)
+                if (nextSlot >= 40)
                     break;
 
                 shop.item[nextSlot].SetDefaults(type);
