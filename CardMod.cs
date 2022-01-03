@@ -1,4 +1,4 @@
-using CardMod.Content.Items.Cards.PreHardmode;
+using CardMod.Content.Items.Cards.Misc;
 using CardMod.Core;
 using Microsoft.Xna.Framework;
 using Mono.Cecil.Cil;
@@ -12,11 +12,13 @@ namespace CardMod
 {
     public class CardMod : Mod
     {
-        public static Mod mod;
+        private static Mod mod;
+
+        public static Mod Mod { get => mod; internal set => mod = value; }
 
         public override void Load()
         {
-            mod = this;
+            Mod = this;
 
             IL.Terraria.Player.TorchAttack += Player_TorchAttack;
             IL.Terraria.Player.UpdateBuffs += Player_UpdateBuffs;
@@ -24,7 +26,7 @@ namespace CardMod
 
         public override void Unload()
         {
-            mod = null;
+            Mod = null;
 
             IL.Terraria.Player.TorchAttack -= Player_TorchAttack;
             IL.Terraria.Player.UpdateBuffs -= Player_UpdateBuffs;
@@ -61,7 +63,7 @@ namespace CardMod
         {
             if (args.Length <= 0)
             {
-                mod.Logger.Error("Used zero arguments!");
+                Mod.Logger.Error("Used zero arguments!");
                 return null;
             }
             else
@@ -73,7 +75,7 @@ namespace CardMod
                     {
                         if (npc is null)
                         {
-                            mod.Logger.Error("Second argument should be NPC!");
+                            Mod.Logger.Error("Second argument should be NPC!");
                             return null;
                         }
 
@@ -87,7 +89,7 @@ namespace CardMod
                                             npc.Card().jellyBlueImmune = boolean;
                                             return true;
                                         default:
-                                            mod.Logger.Error("Third argument should be boolean!");
+                                            Mod.Logger.Error("Third argument should be boolean!");
                                             break;
                                     }
                                     return false;
@@ -100,7 +102,7 @@ namespace CardMod
                                             npc.Card().jellyPinkImmune = boolean;
                                             return true;
                                         default:
-                                            mod.Logger.Error("Third argument should be boolean!");
+                                            Mod.Logger.Error("Third argument should be boolean!");
                                             break;
                                     }
                                     return false;
@@ -113,13 +115,13 @@ namespace CardMod
                                             npc.Card().jellyGreenImmune = boolean;
                                             return true;
                                         default:
-                                            mod.Logger.Error("Third argument should be boolean!");
+                                            Mod.Logger.Error("Third argument should be boolean!");
                                             break;
                                     }
                                     return false;
                                 }
                             default:
-                                mod.Logger.Error("Unknown first argument!");
+                                Mod.Logger.Error("Unknown first argument!");
                                 return false;
                         }
                     }
@@ -128,7 +130,7 @@ namespace CardMod
                         Player player = args[1] is int @int ? Main.player[@int] : args[1] as Player;
                         if (player is null)
                         {
-                            mod.Logger.Error("Second argument should be Player!");
+                            Mod.Logger.Error("Second argument should be Player!");
                             return null;
                         }
                         switch (callType)
@@ -141,7 +143,7 @@ namespace CardMod
                                             player.Card().blueJellyCardImmune = boolean;
                                             return true;
                                         default:
-                                            mod.Logger.Error("Third argument should be boolean!");
+                                            Mod.Logger.Error("Third argument should be boolean!");
                                             break;
                                     }
                                     return false;
@@ -154,7 +156,7 @@ namespace CardMod
                                             player.Card().greenJellyCardImmune = boolean;
                                             return true;
                                         default:
-                                            mod.Logger.Error("Third argument should be boolean!");
+                                            Mod.Logger.Error("Third argument should be boolean!");
                                             break;
                                     }
                                     return false;
@@ -167,13 +169,13 @@ namespace CardMod
                                             player.Card().pinkJellyCardImmune = boolean;
                                             return true;
                                         default:
-                                            mod.Logger.Error("Third argument should be boolean!");
+                                            Mod.Logger.Error("Third argument should be boolean!");
                                             break;
                                     }
                                     return false;
                                 }
                             default:
-                                mod.Logger.Error("Unknown first argument!");
+                                Mod.Logger.Error("Unknown first argument!");
                                 return false;
                         }
                     }
@@ -181,7 +183,7 @@ namespace CardMod
                 }
                 else
                 {
-                    mod.Logger.Error("First argument should be a string!");
+                    Mod.Logger.Error("First argument should be a string!");
                     return null;
                 }
             }

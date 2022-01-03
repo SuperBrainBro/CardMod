@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 
-namespace CardMod.Content.Items.Cards.PreHardmode
+namespace CardMod.Content.Items.Cards.Misc
 {
     public class TorchGodCard : BaseCard
     {

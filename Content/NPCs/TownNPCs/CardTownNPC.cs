@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 namespace CardMod.Content.NPCs.TownNPCs
 {
     [AutoloadHead]
-    internal class CardTownNPC : ModNPC
+    public class CardTownNPC : ModNPC
     {
         private static int shopNum;
         private static readonly bool showCycleShop;
@@ -97,13 +97,13 @@ namespace CardMod.Content.NPCs.TownNPCs
                 shopNum++;
             }
 
-            if (shopNum > GetSellableItems().Count / 40)
+            if (shopNum > SellableItems.Count / 40)
                 shopNum = 0;
         }
 
         public override void SetupShop(Chest shop, ref int nextSlot)
         {
-            List<int> sellableItems = GetSellableItems();
+            List<int> sellableItems = SellableItems;
             int i = 0;
             foreach (int type in sellableItems)
             {
@@ -131,12 +131,12 @@ namespace CardMod.Content.NPCs.TownNPCs
             if (item.ModItem == null)
                 return;
 
-            if (item.ModItem.Name.EndsWith("Card") && item.ModItem.Mod.Name.Equals(CardMod.mod.Name))
+            if (item.ModItem.Name.EndsWith("Card") && item.ModItem.Mod.Name.Equals(CardMod.Mod.Name))
             {
                 if (item.ModItem is BaseCard)
                 {
                     BaseCard card = item.ModItem as BaseCard;
-                    var rare = card.cardRarity switch
+                    ShopGroups rare = card.cardRarity switch
                     {
                         0 => ShopGroups.Common,
                         1 => ShopGroups.Uncommon,
@@ -153,31 +153,34 @@ namespace CardMod.Content.NPCs.TownNPCs
             }
         }
 
-        private static List<int> GetSellableItems()
+        private static List<int> SellableItems
         {
-            List<int>[] itemCollections = new List<int>[6];
-            for (int i = 0; i < itemCollections.Length; i++)
-                itemCollections[i] = new List<int>();
-
-            for (int i = 0; i < Main.maxPlayers; i++)
+            get
             {
-                Player player = Main.player[i];
-                if (!player.active)
-                    continue;
+                List<int>[] itemCollections = new List<int>[6];
+                for (int i = 0; i < itemCollections.Length; i++)
+                    itemCollections[i] = new List<int>();
 
-                foreach (Item item in player.inventory)
-                    TryAddItem(item, itemCollections);
+                for (int i = 0; i < Main.maxPlayers; i++)
+                {
+                    Player player = Main.player[i];
+                    if (!player.active)
+                        continue;
 
-                foreach (Item item in player.armor)
-                    TryAddItem(item, itemCollections);
+                    foreach (Item item in player.inventory)
+                        TryAddItem(item, itemCollections);
+
+                    foreach (Item item in player.armor)
+                        TryAddItem(item, itemCollections);
+                }
+
+                List<int> sellableItems = new();
+                for (int i = 0; i < itemCollections.Length; i++)
+                {
+                    sellableItems.AddRange(itemCollections[i]);
+                }
+                return sellableItems;
             }
-
-            List<int> sellableItems = new();
-            for (int i = 0; i < itemCollections.Length; i++)
-            {
-                sellableItems.AddRange(itemCollections[i]);
-            }
-            return sellableItems;
         }
     }
 }

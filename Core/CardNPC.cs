@@ -114,76 +114,9 @@ namespace CardMod.Core
 
             if (npc.SpawnedFromStatue)
                 return;
+
             switch (npc.type)
             {
-                case NPCID.Bunny:
-                case NPCID.BunnySlimed:
-                case NPCID.BunnyXmas:
-                case NPCID.PartyBunny:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<BunnyCard>(), normie));
-                    break;
-                case NPCID.Squirrel:
-                case NPCID.SquirrelRed:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<SquirrelCard>(), normie));
-                    break;
-                case NPCID.Bird:
-                case NPCID.BirdBlue:
-                case NPCID.BirdRed:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<BirdCard>(), normie));
-                    break;
-                case NPCID.GreenSlime:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<GreenSlimeCard>(), normie));
-                    break;
-                case NPCID.BlueSlime:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<BlueSlimeCard>(), normie));
-                    break;
-                case NPCID.UmbrellaSlime:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<UmbrellaSlimeCard>(), normie));
-                    break;
-                case NPCID.BlueJellyfish:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<BlueJellyfishCard>(), normie));
-                    break;
-                case NPCID.PinkJellyfish:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<PinkJellyfishCard>(), normie));
-                    break;
-                case NPCID.Nymph:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<NymphCard>(), normie));
-                    break;
-                case NPCID.GoldenSlime:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<GoldenSlimeCard>(), normie));
-                    break;
-                case NPCID.FireImp:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<ImpCard>(), normie));
-                    break;
-                case NPCID.Demon:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<DemonCard>(), normie));
-                    break;
-
-                case NPCID.GreenJellyfish:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<GreenJellyfishCard>(), normie));
-                    break;
-                case NPCID.PirateCorsair:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<DiscountCard>(), (int)(normie * 12.5)));
-                    break;
-                case NPCID.PirateCrossbower:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<DiscountCard>(), (int)(normie * 12.5)));
-                    break;
-                case NPCID.PirateDeadeye:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<DiscountCard>(), (int)(normie * 12.5)));
-                    break;
-                case NPCID.PirateDeckhand:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<DiscountCard>(), (int)(normie * 12.5)));
-                    break;
-                case NPCID.PirateCaptain:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<DiscountCard>(), normie * 5));
-                    break;
-                case NPCID.PirateShip:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<DiscountCard>(), normie));
-                    break;
-                case NPCID.RedDevil:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<RedDevilCard>(), normie));
-                    break;
-
                 case NPCID.EaterofWorldsHead:
                     npcLoot.Add(ItemDropRule.ByCondition(new Conditions.EOWHeadLast(), ItemType<EaterOfWorldsCard>(), boss));
                     break;
@@ -193,13 +126,50 @@ namespace CardMod.Core
                 case NPCID.EaterofWorldsTail:
                     npcLoot.Add(ItemDropRule.ByCondition(new Conditions.EOWTailLast(), ItemType<EaterOfWorldsCard>(), boss));
                     break;
-                case NPCID.WallofFlesh:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<WallOfFleshCard>(), boss));
-                    break;
-                case NPCID.QueenSlimeBoss:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<QueenSlimeCard>(), boss));
+                default:
                     break;
             }
+
+            int card = npc.type switch
+            {
+                NPCID.Bunny or NPCID.BunnySlimed or NPCID.BunnyXmas or NPCID.PartyBunny => ItemType<BunnyCard>(),
+                NPCID.Squirrel or NPCID.SquirrelRed => ItemType<SquirrelCard>(),
+                NPCID.Bird or NPCID.BirdBlue or NPCID.BirdRed => ItemType<BirdCard>(),
+
+                NPCID.GreenSlime => ItemType<GreenSlimeCard>(),
+                NPCID.BlueSlime => ItemType<BlueSlimeCard>(),
+                NPCID.UmbrellaSlime => ItemType<UmbrellaSlimeCard>(),
+                NPCID.BlueJellyfish => ItemType<BlueJellyfishCard>(),
+                NPCID.PinkJellyfish => ItemType<PinkJellyfishCard>(),
+                NPCID.Nymph => ItemType<NymphCard>(),
+                NPCID.GoldenSlime => ItemType<GoldenSlimeCard>(),
+                NPCID.FireImp => ItemType<ImpCard>(),
+                NPCID.Demon => ItemType<DemonCard>(),
+
+                NPCID.GreenJellyfish => ItemType<GreenJellyfishCard>(),
+                NPCID.PirateShip => ItemType<ShopDiscountCard>(),
+                NPCID.RedDevil => ItemType<RedDevilCard>(),
+
+                NPCID.BloodNautilus => ItemType<DreadnautilusCard>(),
+
+                NPCID.WallofFlesh => ItemType<WallOfFleshCard>(),
+                NPCID.QueenSlimeBoss => ItemType<QueenSlimeCard>(),
+
+                _ => 0,
+            };
+
+            int chance = npc.type switch
+            {
+                NPCID.PirateCorsair or NPCID.PirateCrossbower or NPCID.PirateDeadeye or NPCID.PirateDeckhand => (int)(normie * 12.5),
+                NPCID.PirateCaptain => normie * 5,
+
+                _ => normie,
+            };
+            if (npc.boss)
+                chance = boss;
+
+            if (card != 0)
+                npcLoot.Add(ItemDropRule.Common(card, chance));
         }
 
         public static class Conditions

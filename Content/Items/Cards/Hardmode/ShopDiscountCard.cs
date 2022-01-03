@@ -3,10 +3,10 @@ using Terraria;
 
 namespace CardMod.Content.Items.Cards.Hardmode
 {
-    public class DiscountCard : BaseCard
+    public class ShopDiscountCard : BaseCard
     {
-        public DiscountCard() : base(CardRarity.Rare,
-            "Rewards Card",
+        public ShopDiscountCard() : base(CardRarity.Rare,
+            "Shop Discount Card",
             "DISCOUNT",
                 "Shops prices are reduced")
         {
