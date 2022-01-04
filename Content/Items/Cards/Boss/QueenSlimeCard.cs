@@ -10,7 +10,8 @@ namespace CardMod.Content.Items.Cards.Boss
         public QueenSlimeCard() : base(CardRarity.Epic,
             "Queen Slime Card",
             "Volatile Bloons",
-                "You project volatile ballons periodically while moving")
+                "You project volatile ballons periodically while moving",
+            "Damage from slimes will be increased, except if you in Hallow biome")
         {
         }
 
@@ -18,6 +19,7 @@ namespace CardMod.Content.Items.Cards.Boss
 
         public override void CardEffects(Player player, bool hideVisuals)
         {
+            player.Card()._cardQueenSlime = true;
             if (player.Moving())
             {
                 if (player.Card()._volatileCD == 0)

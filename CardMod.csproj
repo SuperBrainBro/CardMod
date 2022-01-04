@@ -13,5 +13,6 @@
   <ItemGroup>
     <Folder Include="Assets\Items\Cards\Boss\" />
     <Folder Include="Assets\Items\Cards\Hardmode\" />
+    <Folder Include="Assets\UIs\" />
   </ItemGroup>
 </Project>

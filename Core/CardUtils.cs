@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 using Terraria;
 
 namespace CardMod.Core
@@ -11,6 +12,12 @@ namespace CardMod.Core
         public static CardItem Card(this Item item) => item.GetGlobalItem<CardItem>();
         public static CardPlayer Card(this Player player) => player.GetModPlayer<CardPlayer>();
         public static CardUIPlayer UI(this Player player) => player.GetModPlayer<CardUIPlayer>();
+
+        public static void AddWithCondition<T>(this List<T> list, T item, bool condition)
+        {
+            if (condition)
+                list.Add(item);
+        }
 
         public static bool Moving(this Player player) => Math.Abs(player.velocity.X) + Math.Abs(player.velocity.Y) > 1.0f && !player.rocketFrame;
 

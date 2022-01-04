@@ -27,6 +27,7 @@ namespace CardMod.Core
         public bool _cardRedDevil;
         public bool onFireDemon;
         public bool onFireDevil;
+        public bool _cardQueenSlime;
 
         public float infernoLevel;
 
@@ -53,6 +54,7 @@ namespace CardMod.Core
             _cardBird = false;
             _cardDemon = false;
             _cardRedDevil = false;
+            _cardQueenSlime = false;
         }
 
         public override void UpdateDead()
@@ -77,6 +79,7 @@ namespace CardMod.Core
             _cardRedDevil = false;
             onFireDemon = false;
             onFireDevil = false;
+            _cardQueenSlime = false;
         }
 
         public override void PreUpdate()
@@ -171,6 +174,12 @@ namespace CardMod.Core
                     value += 80;
                 Player.lifeRegen -= value;
             }
+        }
+
+        public override void ModifyHitByNPC(NPC npc, ref int damage, ref bool crit)
+        {
+            if (CardLists.Slimes.Contains(npc.type) && Player.Card()._cardQueenSlime && !Player.ZoneHallow)
+                damage = (int)(damage * Main.rand.NextFloat(0.95f, 3f));
         }
     }
 }

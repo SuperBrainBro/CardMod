@@ -15,7 +15,7 @@ namespace CardMod
             "\nPossible results: crashing, game-breaking bugs, etch." +
             "\nYou was warned!")]
         [Label("Experimental Changes")]
-        public bool ExperimentalFuncs;
+        public bool ExperimentalFuncs = false;
 
         public override void OnLoaded() => Instance = this;
     }

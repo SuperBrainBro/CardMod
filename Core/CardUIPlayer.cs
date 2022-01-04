@@ -21,18 +21,12 @@ namespace CardMod.Core
 
             if (!BattleUI.visible)
             {
+                InBattleWith = null;
                 cards = new CardStruct[5] { CardStruct.Null, CardStruct.Null, CardStruct.Null, CardStruct.Null, CardStruct.Null };
                 cards2 = new CardStruct[5] { CardStruct.Null, CardStruct.Null, CardStruct.Null, CardStruct.Null, CardStruct.Null };
             }
             else
             {
-                /*for (int i = 0; i < 5; i++)
-                {
-                    if (cards[i].health <= 0 && !cards[i].dead)
-                        cards[i].dead = true;
-                    if (cards2[i].health <= 0 && !cards2[i].dead)
-                        cards2[i].dead = true;
-                }*/
             }
         }
 
@@ -45,16 +39,13 @@ namespace CardMod.Core
 
         public override void PostUpdateMiscEffects()
         {
-            if (CardMod.prepareCards.JustPressed)
+            if (CardMod.prepareCards.JustPressed && CardMod.prepareCards != null)
             {
-                for (int i = 0; i < 5; i++)
-                {
-                    cards[i] = new CardStruct(Main.rand.Next(0, 5), Main.rand.Next(1, 100), Main.rand.Next(500, 2500));
-                    cards2[i] = new CardStruct(Main.rand.Next(0, 5), Main.rand.Next(1, 100), Main.rand.Next(500, 2500));
-                }
+                cards = Cards.GetRandCard(5).ToArray();
+                cards2 = Cards.GetRandCard(5).ToArray();
             }
 
-            if (CardMod.Experimental && CardMod.showUI.JustPressed)
+            if (CardMod.Experimental && CardMod.showUI.JustPressed && CardMod.prepareCards != null)
                 BattleUI.visible = !BattleUI.visible;
             if (!CardMod.Experimental && BattleUI.visible)
                 BattleUI.visible = false;

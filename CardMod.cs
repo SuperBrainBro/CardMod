@@ -2,9 +2,11 @@ using CardMod.Content.Items.Cards.Misc;
 using CardMod.Core;
 using CardMod.Core.UIs.Battle;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
+using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -27,10 +29,17 @@ namespace CardMod
         {
             Mod = this;
 
+            CardLists.Load();
+
             if (Experimental)
             {
-                prepareCards = KeybindLoader.RegisterKeybind(Mod, "Prepare to Battle", Microsoft.Xna.Framework.Input.Keys.F5);
-                showUI = KeybindLoader.RegisterKeybind(Mod, "Show Battle UI", Microsoft.Xna.Framework.Input.Keys.F6);
+                prepareCards = KeybindLoader.RegisterKeybind(Mod, "Prepare to Battle", Keys.F5);
+                showUI = KeybindLoader.RegisterKeybind(Mod, "Show Battle UI", Keys.F6);
+            }
+            else
+            {
+                prepareCards = KeybindLoader.RegisterKeybind(Mod, "Experimental Func #1", Keys.F5);
+                showUI = KeybindLoader.RegisterKeybind(Mod, "Experimental Func #2", Keys.F6);
             }
 
             IL.Terraria.Player.TorchAttack += Player_TorchAttack;
@@ -49,9 +58,12 @@ namespace CardMod
         {
             Mod = null;
 
+            CardLists.Unload();
+
             IL.Terraria.Player.TorchAttack -= Player_TorchAttack;
             IL.Terraria.Player.UpdateBuffs -= Player_UpdateBuffs;
 
+            BattleUI.visible = false;
             BattleUI = null;
             BattleInterface = null;
         }

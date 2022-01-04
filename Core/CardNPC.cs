@@ -103,7 +103,7 @@ namespace CardMod.Core
                 if (player.Card()._cardBird)
                     mult += 0.1f;
 
-                item.value = (int)Math.Round(item.value * mult);
+                item.value = (int)Math.Round((decimal)(item.value * mult * 100)) / 100;
             }
         }
 
