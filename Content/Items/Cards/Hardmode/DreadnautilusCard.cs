@@ -6,7 +6,7 @@ namespace CardMod.Content.Items.Cards.Hardmode
 {
     public class DreadnautilusCard : BaseCard
     {
-        public DreadnautilusCard() : base(CardRarity.Rare,
+        public DreadnautilusCard() : base(CardRarity.Epic,
             "Dreadnautilus Card",
             "Blood Sacrifice",
             "When you have lower than 50% of max health," +

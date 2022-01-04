@@ -1,5 +1,6 @@
 using CardMod.Content.Items.Cards.Misc;
 using CardMod.Core;
+using CardMod.Core.UIs.Battle;
 using Microsoft.Xna.Framework;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
@@ -7,21 +8,41 @@ using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.UI;
 
 namespace CardMod
 {
     public class CardMod : Mod
     {
+        public static bool Experimental => CardConfig.Instance.ExperimentalFuncs;
         private static Mod mod;
+        public UserInterface BattleInterface;
+        internal BattleUI BattleUI;
+        internal static ModKeybind prepareCards;
+        internal static ModKeybind showUI;
 
-        public static Mod Mod { get => mod; internal set => mod = value; }
+        public static Mod Mod { get => mod; private set => mod = value; }
 
         public override void Load()
         {
             Mod = this;
 
+            if (Experimental)
+            {
+                prepareCards = KeybindLoader.RegisterKeybind(Mod, "Prepare to Battle", Microsoft.Xna.Framework.Input.Keys.F5);
+                showUI = KeybindLoader.RegisterKeybind(Mod, "Show Battle UI", Microsoft.Xna.Framework.Input.Keys.F6);
+            }
+
             IL.Terraria.Player.TorchAttack += Player_TorchAttack;
             IL.Terraria.Player.UpdateBuffs += Player_UpdateBuffs;
+
+            if (!Main.dedServ)
+            {
+                BattleUI = new BattleUI();
+                BattleUI.Activate();
+                BattleInterface = new UserInterface();
+                BattleInterface.SetState(BattleUI);
+            }
         }
 
         public override void Unload()
@@ -30,6 +51,14 @@ namespace CardMod
 
             IL.Terraria.Player.TorchAttack -= Player_TorchAttack;
             IL.Terraria.Player.UpdateBuffs -= Player_UpdateBuffs;
+
+            BattleUI = null;
+            BattleInterface = null;
+        }
+
+        public override void PostSetupContent()
+        {
+            BattleInterface?.SetState(BattleUI);
         }
 
         private void Player_TorchAttack(ILContext il)

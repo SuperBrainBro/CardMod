@@ -1,9 +1,11 @@
 ﻿using CardMod.Content.Slots;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Creative;
+using Terraria.GameContent.UI;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -69,6 +71,18 @@ namespace CardMod.Core
 
             Item.Card().isCard = isCard;
             Item.accessory = isCard;
+
+            Item.value = cardRarity switch
+            {
+                CardRarity.Uncommon => Item.sellPrice(silver: 50),
+                CardRarity.Rare => Item.sellPrice(gold: 2, silver: 25),
+                CardRarity.Epic => Item.sellPrice(gold: 5),
+                CardRarity.Legendary => Item.sellPrice(gold: 12, silver: 50),
+                CardRarity.Mythical => Item.sellPrice(gold: 25),
+                >= CardRarity.Count => (int)Math.Pow(cardRarity, Math.Sqrt(5)) * 10000,
+                _ => Item.sellPrice(silver: 10),
+            };
+
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -117,13 +131,28 @@ namespace CardMod.Core
                 int sacrificeCount = Main.LocalPlayerCreativeTracker.ItemSacrifices.GetSacrificeCount(Item.type);
                 if (amountNeeded - sacrificeCount > 0)
                 {
-                    string text = Language.GetTextValue("CommonItemTooltip.CreativeSacrificeNeeded", amountNeeded - sacrificeCount);
-                    tooltips.Add(new TooltipLine(Mod, "CreativeSacrifice", text) { overrideColor = Colors.JourneyMode });
+                    tooltips.Add(new TooltipLine(Mod, "CreativeSacrifice", Language.GetTextValue("CommonItemTooltip.CreativeSacrificeNeeded",
+                        amountNeeded - sacrificeCount)) { overrideColor = Colors.JourneyMode });
                 }
             }
 
+            TooltipLine line0 = tooltips.Find(x => x.mod == "Terraria" && x.Name == "Price");
+            if (line0 != null)
+            {
+                TooltipLine line1 = new(Mod, line0.Name, line0.text)
+                {
+                    overrideColor = line0.overrideColor,
+                    isModifier = line0.isModifier,
+                    isModifierBad = line0.isModifierBad
+                }; /// Save Price line
+
+                tooltips.Remove(line0); /// Remove vanilla Price line
+
+                tooltips.Add(line1); /// Add modded Price line
+            }
+
             SafeModifyTooltips(ref tooltips);
-            tooltips.RemoveAll(x => x.mod == "Terraria" && x.Name != "ItemName");
+            tooltips.RemoveAll(x => x.mod == "Terraria" && x.Name != "ItemName" && x.Name != "Price");
         }
 
         public virtual void SafeModifyTooltips(ref List<TooltipLine> tooltips)

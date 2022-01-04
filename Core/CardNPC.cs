@@ -118,13 +118,13 @@ namespace CardMod.Core
             switch (npc.type)
             {
                 case NPCID.EaterofWorldsHead:
-                    npcLoot.Add(ItemDropRule.ByCondition(new Conditions.EOWHeadLast(), ItemType<EaterOfWorldsCard>(), boss));
+                    npcLoot.Add(ItemDropRule.ByCondition(new MCondition.EOWHeadLast(), ItemType<EaterOfWorldsCard>(), boss));
                     break;
                 case NPCID.EaterofWorldsBody:
-                    npcLoot.Add(ItemDropRule.ByCondition(new Conditions.EOWBodyLast(), ItemType<EaterOfWorldsCard>(), boss));
+                    npcLoot.Add(ItemDropRule.ByCondition(new MCondition.EOWBodyLast(), ItemType<EaterOfWorldsCard>(), boss));
                     break;
                 case NPCID.EaterofWorldsTail:
-                    npcLoot.Add(ItemDropRule.ByCondition(new Conditions.EOWTailLast(), ItemType<EaterOfWorldsCard>(), boss));
+                    npcLoot.Add(ItemDropRule.ByCondition(new MCondition.EOWTailLast(), ItemType<EaterOfWorldsCard>(), boss));
                     break;
                 default:
                     break;
@@ -149,6 +149,8 @@ namespace CardMod.Core
                 NPCID.GreenJellyfish => ItemType<GreenJellyfishCard>(),
                 NPCID.PirateShip => ItemType<ShopDiscountCard>(),
                 NPCID.RedDevil => ItemType<RedDevilCard>(),
+                NPCID.PirateCorsair or NPCID.PirateCrossbower or NPCID.PirateDeadeye or NPCID.PirateDeckhand => ItemType<ShopDiscountCard>(),
+                NPCID.PirateCaptain => ItemType<ShopDiscountCard>(),
 
                 NPCID.BloodNautilus => ItemType<DreadnautilusCard>(),
 
@@ -172,7 +174,7 @@ namespace CardMod.Core
                 npcLoot.Add(ItemDropRule.Common(card, chance));
         }
 
-        public static class Conditions
+        public static class MCondition
         {
             public class EOWHeadLast : IItemDropRuleCondition, IProvideItemConditionDescription
             {
