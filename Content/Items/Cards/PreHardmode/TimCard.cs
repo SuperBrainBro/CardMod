@@ -11,7 +11,8 @@ namespace CardMod.Content.Items.Cards.PreHardmode
             "Wizardly Chaos",
                 "Increases maximum mana by 40" +
               "\n8% increased magic critical strike chance" +
-              "\n4% increased magic damage")
+              "\n4% increased magic damage",
+            "Due to chaotic powers, your health is decreased")
         {
         }
 
@@ -22,6 +23,8 @@ namespace CardMod.Content.Items.Cards.PreHardmode
             player.statManaMax2 += 40;
             player.GetDamage(DamageClass.Magic) += 0.04f;
             player.GetCritChance(DamageClass.Magic) += 8;
+
+            player.statLifeMax2 -= 10;
         }
     }
 }

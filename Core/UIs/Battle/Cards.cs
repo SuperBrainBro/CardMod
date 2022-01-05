@@ -11,7 +11,7 @@ namespace CardMod.Core.UIs.Battle
     /// </summary>
     public class Cards
     {
-        public static CardStruct KingSlime => new(1, 40, 400, condition: NPC.downedSlimeKing);
+        public static CardStruct KingSlime => new(1, 40, 400, condition: () => NPC.downedSlimeKing);
         public static CardStruct BlueSlime => new(2, 7, 25);
         public static CardStruct GreenSlime => new(3, 6, 14);
         public static CardStruct RedSlime => new(4, 12, 35);
@@ -26,13 +26,13 @@ namespace CardMod.Core.UIs.Battle
             foreach (FieldInfo info in infos)
             {
                 Type type = info.FieldType;
-                object value = info.GetValue(info);
+                object value = info.GetValue(null);
 
                 if (value.GetType() == typeof(CardStruct))
                 {
                     CardStruct value2 = value as CardStruct;
 
-                    if (value2.condition)
+                    if (value2.condition?.Invoke() ?? true)
                         cardStructs.Add(value2, type.Name);
 
                     CardMod.Mod.Logger.Debug($"Success! Field '{type.Name}' was added to an array.");
@@ -48,36 +48,28 @@ namespace CardMod.Core.UIs.Battle
 
         public static List<CardStruct> GetRandCard(int tries)
         {
-            List<CardStruct> structs = new();
+            HashSet<CardStruct> structs = new();
             List<CardStruct> _maxCards = GetCardDictionary().Keys.ToList();
 
-            int tries2 = tries;
             int num;
+            int tries2 = tries;
             int totalTries = 0;
             do
             {
                 num = Main.rand.Next(_maxCards.Count);
-                if (!structs.Contains(_maxCards.ToArray()[num]))
-                {
-                    structs.Add(_maxCards.ToArray()[num]);
-                    tries2--;
-                }
-                totalTries++;
 
-                if (totalTries >= 10000)
+                if (structs.Add(_maxCards[num]))
+                    tries2--;
+
+                if (++totalTries >= 10000)
                 {
-                    CardMod.Mod.Logger.Warn($"Out of possible tries amount. {tries2}/{num}/{_maxCards.Count}");
+                    CardMod.Mod.Logger.Warn($"Out of possible tries amount.");
                     break;
                 }
             }
             while (tries2 > 0);
 
-            if ((structs.Count > tries || structs.Count < tries) && tries2 == 0)
-            {
-                CardMod.Mod.Logger.Error("Something is wrong...");
-            }
-
-            return structs;
+            return structs.ToList();
         }
     }
 }
