@@ -1,5 +1,5 @@
-displayName = Card Mod
-author = FoxXD_, Vincent Jenei
+displayName = Ancient Cards Mod
+author = FoxXD_
 version = 0.1
 hideCode = true
 hideResources = true

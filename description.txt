@@ -1,16 +1,16 @@
-An essential mod - Card Mod - adds in an entirely new 'accesory' system with its own slot. Every monster has a chance to drop their own designated card. Each enemy's card will provide it's beholder with cool and unique effects. However, only 1 card can be equipped at a time. This means cards have a synergistic effect with accesories, but they can't have synergy with other cards. That makes them each balanced. Instead of drastically changing how you play Terraria, these cards add a new collectable aspect and another reason to grind up those monsters!
+An essential mod - Ancient Cards Mod - adds in an entirely new 'accesory' system with its own slot. Every monster has a chance to drop their own designated card. Each enemy's card will provide it's beholder with cool and unique effects. However, only 1 card can be equipped at a time. This means cards have a synergistic effect with accesories, but they can't have synergy with other cards. That makes them each balanced. Instead of drastically changing how you play Terraria, these cards add a new collectable aspect and another reason to grind up those monsters!
 
 	Quality > Quantity
 	Great addition to any modded playthrough.
 	Every monster, including bosses, have their own card.
 
-Discord Link: https://discord.gg/WHMg38mXs8
+Discord Link: https://discord.gg/BzHmfb8V3c
 
 Changelog:
 
-1.0
-	Initial version. Codebase and some initial cards are created.
+Beta 0.1
+	 Initial version. Codebase and some initial cards are created.
+	 Introduced Experimental Function: Battle UI
 
 Developers:
-	 FoxXD_ (basically, i am little fox#5356)
-	 Vincent Jenei (Lite#4211)
+	 FoxXD_

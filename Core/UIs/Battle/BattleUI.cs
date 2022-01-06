@@ -183,19 +183,30 @@ namespace CardMod.Core.UIs.Battle
         private static string ToGoodInt(int value)
         {
             int value2 = value;
+            string size = "";
 
-            bool thousands = false;
-
-            if (value2 >= 1000)
+            if (value2 >= 1000 && size == "")
             {
                 value2 /= 1000;
-                thousands = true;
+                size = "k";
+            }
+            if (value2 >= 1000 && size == "k")
+            {
+                value2 /= 1000;
+                size = "m";
+            }
+            if (value2 >= 1000 && size == "m")
+            {
+                value2 /= 1000;
+                size = "b";
+            }
+            if (value2 >= 1000 && size == "b")
+            {
+                value2 /= 1000;
+                size = "t";
             }
 
-            if (thousands)
-                return $"{value2}K";
-
-            string str = value2.ToString();
+            string str = $"{value2}{size.ToUpper()}";
             if (value2 <= 0)
                 return "0";
             return str;
