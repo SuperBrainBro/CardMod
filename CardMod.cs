@@ -6,7 +6,6 @@ using Microsoft.Xna.Framework.Input;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
-using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -255,6 +254,29 @@ namespace CardMod
             public class Mythic : ModRarity
             {
                 public override Color RarityColor => new(255, 68, 171);
+            }
+
+            public class Dedicated : ModRarity
+            {
+                public override Color RarityColor
+                {
+                    get
+                    {
+                        Color[] itemNameCycleColors = new Color[]
+                        {
+                            new Color(164, 119, 255),
+                            new Color(232, 191, 255),
+                            new Color(191, 247, 205),
+                            new Color(112, 159, 255),
+                        };
+
+                        float counter = 90f / itemNameCycleColors.Length;
+                        float fade = Main.GameUpdateCount % (int)counter / counter;
+                        int index = (int)(Main.GameUpdateCount / (int)counter % itemNameCycleColors.Length);
+
+                        return Color.Lerp(itemNameCycleColors[index], itemNameCycleColors[(index + 1) % itemNameCycleColors.Length], fade);
+                    }
+                }
             }
         }
     }

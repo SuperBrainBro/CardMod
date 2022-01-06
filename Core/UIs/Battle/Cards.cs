@@ -12,11 +12,11 @@ namespace CardMod.Core.UIs.Battle
     public class Cards
     {
         public static CardStruct KingSlime => new(1, 40, 400, condition: () => NPC.downedSlimeKing);
-        public static CardStruct BlueSlime => new(2, 7, 25);
-        public static CardStruct GreenSlime => new(3, 6, 14);
-        public static CardStruct RedSlime => new(4, 12, 35);
-        public static CardStruct PurpleSlime => new(5, 12, 40);
-        public static CardStruct GoldenSlime => new(6, 5, 300);
+        public static CardStruct BlueSlime => new(2, 7, 25, abilitiesOnCard: new int[2] { 1, 2 });
+        public static CardStruct GreenSlime => new(3, 6, 14, abilitiesOnCard: new int[2] { 1, 2 });
+        public static CardStruct RedSlime => new(4, 12, 35, abilitiesOnCard: new int[2] { 1, 2 });
+        public static CardStruct PurpleSlime => new(5, 12, 40, abilitiesOnCard: new int[2] { 1, 2 });
+        public static CardStruct GoldenSlime => new(6, 5, 300, abilitiesOnCard: new int[2] { 1, 2 });
 
         public static Dictionary<CardStruct, string> GetCardDictionary()
         {
@@ -32,7 +32,7 @@ namespace CardMod.Core.UIs.Battle
                 {
                     CardStruct value2 = value as CardStruct;
 
-                    if (value2.condition?.Invoke() ?? true)
+                    //if (value2.condition?.Invoke() ?? true)
                         cardStructs.Add(value2, type.Name);
 
                     CardMod.Mod.Logger.Debug($"Success! Field '{type.Name}' was added to an array.");

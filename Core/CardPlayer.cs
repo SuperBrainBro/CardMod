@@ -30,6 +30,7 @@ namespace CardMod.Core
         public bool _cardQueenSlime;
 
         public float infernoLevel;
+        public bool foxPet;
 
         public bool InfernoWeak => infernoLevel is < 3f and >= 1f;
         public bool InfernoMedium => infernoLevel is >= 3f and < 5f;
@@ -55,6 +56,7 @@ namespace CardMod.Core
             _cardDemon = false;
             _cardRedDevil = false;
             _cardQueenSlime = false;
+            foxPet = false;
         }
 
         public override void UpdateDead()
@@ -80,6 +82,7 @@ namespace CardMod.Core
             onFireDemon = false;
             onFireDevil = false;
             _cardQueenSlime = false;
+            foxPet = false;
         }
 
         public override void PreUpdate()

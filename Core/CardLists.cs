@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using CardMod.Content.Items.Pets;
+using System.Collections.Generic;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace CardMod.Core
 {
     public class CardLists
     {
         private static List<int> slimes;
+        private static Dictionary<int, string> dedicatedItems;
 
         public static List<int> Slimes { get => slimes; set => slimes = value; }
+        public static Dictionary<int, string> DedicatedItems { get => dedicatedItems; set => dedicatedItems = value; }
 
         public static void Load()
         {
@@ -41,11 +45,16 @@ namespace CardMod.Core
                 NPCID.IlluminantSlime,
                 NPCID.Gastropod,
             };
+            DedicatedItems = new Dictionary<int, string>()
+            {
+                { ModContent.ItemType<FoxCookie>(), "FoxXD_" },
+            };
         }
 
         public static void Unload()
         {
             Slimes = null;
+            DedicatedItems = null;
         }
     }
 }

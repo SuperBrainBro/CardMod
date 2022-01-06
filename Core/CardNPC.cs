@@ -1,6 +1,7 @@
 ﻿using CardMod.Content.Items.Cards.Boss;
 using CardMod.Content.Items.Cards.Hardmode;
 using CardMod.Content.Items.Cards.PreHardmode;
+using CardMod.Content.Items.Pets;
 using System;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
@@ -117,6 +118,10 @@ namespace CardMod.Core
 
             switch (npc.type)
             {
+                case NPCID.GiantFlyingFox:
+                    npcLoot.Add(ItemDropRule.Common(ItemType<FoxCookie>(), 100));
+                    break;
+
                 case NPCID.EaterofWorldsHead:
                     npcLoot.Add(ItemDropRule.ByCondition(new MCondition.EOWHeadLast(), ItemType<EaterOfWorldsCard>(), boss));
                     break;

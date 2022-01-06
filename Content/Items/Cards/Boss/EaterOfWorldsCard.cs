@@ -7,7 +7,7 @@ namespace CardMod.Content.Items.Cards.Boss
 {
     public class EaterOfWorldsCard : BaseCard
     {
-        public EaterOfWorldsCard() : base(CardRarity.Rare,
+        public EaterOfWorldsCard() : base(CardRarity.Epic,
             "Eater of Worlds Card",
             "Symmetrical Shadow",
                 "Around player are flying shadow orbs" +
