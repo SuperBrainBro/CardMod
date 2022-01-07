@@ -28,10 +28,6 @@ namespace CardMod
         {
             Mod = this;
 
-<<<<<<< HEAD
-            BattleUI_Area = ModContent.Request<Texture2D>("CardMod/Assets/UIs/BattleUI_Area");
-=======
->>>>>>> parent of 1b184a9 (last one)
             CardLists.Load();
 
             if (Experimental)

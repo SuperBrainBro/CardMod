@@ -38,7 +38,7 @@ namespace CardMod.Core
 
         public override void PostUpdateMiscEffects()
         {
-            if (CardMod.prepareCards.JustPressed && CardMod.prepareCards != null)
+            if (CardMod.prepareCards.JustPressed && CardMod.Experimental)
             {
                 for (int i = 0; i < cards.Length; i++)
                 {

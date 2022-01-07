@@ -74,11 +74,11 @@ namespace CardMod.Core.UIs.Battle
                                 player.UI().cards[i].dead = true;
                         }
 
-                        if (player.UI().cards2[i].health > 0 && !player.UI().cards[i].dead)
+                        if (uiEnemy.UI().cards2[i].health > 0 && !player.UI().cards[i].dead)
                         {
-                            player.UI().cards2[i].health -= player.UI().cards[i].damage;
-                            if (player.UI().cards2[i].health <= 0)
-                                player.UI().cards2[i].dead = true;
+                            uiEnemy.UI().cards2[i].health -= player.UI().cards[i].damage;
+                            if (uiEnemy.UI().cards2[i].health <= 0)
+                                uiEnemy.UI().cards2[i].dead = true;
                         }
 
                         _actionTimer = 60;
@@ -117,7 +117,7 @@ namespace CardMod.Core.UIs.Battle
 
                 batch.Draw(ModContent.Request<Texture2D>(values[i]).Value, hits, cardColor);
                 for (int j = 0; j < 2; j++)
-                    if (@struct[i].abilitiesOnCard.Length == 2)
+                    if (@struct[i].abilitiesOnCard.Length == 2 && @struct[i].abilitiesOnCard != null)
                         batch.Draw(ModContent.Request<Texture2D>($"{path}/Cards/Ability_{@struct[i].abilitiesOnCard[j]}").Value, vectors2[j], cardColor);
 
                 if (@struct[i].dead)
