@@ -31,8 +31,7 @@ namespace CardMod
         {
             Mod = this;
 
-            if (BattleUI_Area.State == 0)
-                BattleUI_Area = ModContent.Request<Texture2D>("CardMod/Assets/UIs/BattleUI_Area");
+            BattleUI_Area = ModContent.Request<Texture2D>("CardMod/Assets/UIs/BattleUI_Area");
             CardLists.Load();
 
             if (Experimental)
