@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader;
@@ -25,7 +24,7 @@ namespace CardMod.Core.UIs.Battle
             panel.BackgroundColor = new Color(255, 255, 255) * 0f;
             panel.BorderColor = new Color(255, 255, 255) * 0f;
 
-            area = new UIImage(ModContent.Request<Texture2D>("CardMod/Assets/UIs/BattleUI_Area").Value);
+            area = new UIImage(CardMod.BattleUI_Area.Value);
 
             panel.Append(area);
 
@@ -41,7 +40,7 @@ namespace CardMod.Core.UIs.Battle
             #region Drawing
             Rectangle hitbox = panel.GetInnerDimensions().ToRectangle();
 
-            spriteBatch.Draw(ModContent.Request<Texture2D>("CardMod/Assets/UIs/BattleUI_Area").Value, hitbox, Color.White);
+            spriteBatch.Draw(CardMod.BattleUI_Area.Value, hitbox, Color.White);
 
             GetTextures(player.UI().cards, out string[] enemyText);
             DrawIcons(spriteBatch, enemyText, player.UI().cards);
@@ -74,18 +73,18 @@ namespace CardMod.Core.UIs.Battle
                                 player.UI().cards[i].dead = true;
                         }
 
-                        if (player.UI().cards2[i].health > 0 && !player.UI().cards[i].dead)
+                        if (uiEnemy.UI().cards2[i].health > 0 && !player.UI().cards[i].dead)
                         {
-                            player.UI().cards2[i].health -= player.UI().cards[i].damage;
-                            if (player.UI().cards2[i].health <= 0)
-                                player.UI().cards2[i].dead = true;
+                            uiEnemy.UI().cards2[i].health -= player.UI().cards[i].damage;
+                            if (uiEnemy.UI().cards2[i].health <= 0)
+                                uiEnemy.UI().cards2[i].dead = true;
                         }
 
                         _actionTimer = 60;
                     }
                     else
                     {
-                        _actionTimer -= 10;
+                        _actionTimer -= 1;
                     }
                 }
             }
@@ -129,7 +128,7 @@ namespace CardMod.Core.UIs.Battle
                     Utils.DrawBorderString(batch, ToGoodInt(@struct[i].health), vectors[1], Color.White, 0.8f);
             }
         }
-        
+
         private void DrawMiddle(SpriteBatch batch, CardStruct[] player, CardStruct[] enemy)
         {
             Rectangle hitbox = panel.GetInnerDimensions().ToRectangle();
@@ -148,25 +147,11 @@ namespace CardMod.Core.UIs.Battle
             texture = new string[4];
             for (int j = 0; j < 4; j++)
             {
-                if (cards[j] != null)
-                {
-                    if (cards[j].card == 1)
-                    {
-                        texture[j] = "CardMod/Assets/UIs/Cards/Card_BlueSlime";
-                    }
-                    else if (cards[j].card == 2)
-                    {
-                        texture[j] = "CardMod/Assets/UIs/Cards/Card_GreenSlime";
-                    }
-                    else
-                    {
-                        texture[j] = "CardMod/Assets/UIs/BattleUI_Card";
-                    }
-                }
-                else
-                {
-                    texture[j] = "CardMod/Assets/UIs/BattleUI_Card";
-                }
+                texture[j] = cards[j] != null
+                    ? (ModContent.FileExists($"CardMod/Assets/UIs/Cards/Card_{cards[j].name}")
+                        ? $"CardMod/Assets/UIs/Cards/Card_{cards[j].name}"
+                        : "CardMod/Assets/UIs/BattleUI_Card")
+                    : "CardMod/Assets/UIs/BattleUI_Card";
             }
         }
 
@@ -185,22 +170,22 @@ namespace CardMod.Core.UIs.Battle
             int value2 = value;
             string size = "";
 
-            if (value2 >= 1000 && size == "")
+            if (value2 >= 1000)
             {
                 value2 /= 1000;
                 size = "k";
             }
-            if (value2 >= 1000 && size == "k")
+            if (value2 >= 1000)
             {
                 value2 /= 1000;
                 size = "m";
             }
-            if (value2 >= 1000 && size == "m")
+            if (value2 >= 1000)
             {
                 value2 /= 1000;
                 size = "b";
             }
-            if (value2 >= 1000 && size == "b")
+            if (value2 >= 1000)
             {
                 value2 /= 1000;
                 size = "t";

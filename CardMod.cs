@@ -2,9 +2,11 @@ using CardMod.Content.Items.Cards.Misc;
 using CardMod.Core;
 using CardMod.Core.UIs.Battle;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -17,6 +19,7 @@ namespace CardMod
     {
         public static bool Experimental => CardConfig.Instance.ExperimentalFuncs;
         private static Mod mod;
+        public static Asset<Texture2D> BattleUI_Area;
         public UserInterface BattleInterface;
         internal BattleUI BattleUI;
         internal static ModKeybind prepareCards;
@@ -28,6 +31,8 @@ namespace CardMod
         {
             Mod = this;
 
+            if (BattleUI_Area.State == 0)
+                BattleUI_Area = ModContent.Request<Texture2D>("CardMod/Assets/UIs/BattleUI_Area");
             CardLists.Load();
 
             if (Experimental)
@@ -57,6 +62,7 @@ namespace CardMod
         {
             Mod = null;
 
+            BattleUI_Area = null;
             CardLists.Unload();
 
             IL.Terraria.Player.TorchAttack -= Player_TorchAttack;

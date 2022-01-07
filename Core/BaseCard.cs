@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Creative;
-using Terraria.GameContent.UI;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -21,7 +20,7 @@ namespace CardMod.Core
         {
             this.cardRarity = cardRarity;
             cardName = name;
-            cardAbility = ability + "!";
+            cardAbility = $"{ability}!";
             cardAbilityDescription = abilityDescription;
             cardWeakness = weakness;
         }
@@ -126,13 +125,16 @@ namespace CardMod.Core
                 abilityLine.overrideColor = new Color(255, 101, 85);
             }
 
-            if ((Item.tooltipContext == 0 || Item.tooltipContext == 2 || Item.tooltipContext == 1 || Item.tooltipContext == 3 || (Item.tooltipContext == 4 || Item.tooltipContext == 15) ? 1 : (Item.tooltipContext == 6 ? 1 : 0)) != 0 && Main.LocalPlayer.difficulty == 3 && CreativeItemSacrificesCatalog.Instance.TryGetSacrificeCountCapToUnlockInfiniteItems(Item.type, out int amountNeeded))
+            if ((Item.tooltipContext is 0 or 2 or 1 or 3 or 4 or 15 or 6 ? 1 : 0) != 0
+                && Main.LocalPlayer.difficulty == PlayerDifficultyID.Creative
+                && CreativeItemSacrificesCatalog.Instance.TryGetSacrificeCountCapToUnlockInfiniteItems(Type, out int amountNeeded))
             {
-                int sacrificeCount = Main.LocalPlayerCreativeTracker.ItemSacrifices.GetSacrificeCount(Item.type);
+                int sacrificeCount = Main.LocalPlayerCreativeTracker.ItemSacrifices.GetSacrificeCount(Type);
                 if (amountNeeded - sacrificeCount > 0)
                 {
                     tooltips.Add(new TooltipLine(Mod, "CreativeSacrifice", Language.GetTextValue("CommonItemTooltip.CreativeSacrificeNeeded",
-                        amountNeeded - sacrificeCount)) { overrideColor = Colors.JourneyMode });
+                        amountNeeded - sacrificeCount))
+                    { overrideColor = Colors.JourneyMode });
                 }
             }
 
