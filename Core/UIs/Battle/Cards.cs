@@ -32,7 +32,7 @@ namespace CardMod.Core.UIs.Battle
                 {
                     CardStruct value2 = value as CardStruct;
 
-                    //if (value2.condition?.Invoke() ?? true)
+                    if (value2.condition?.Invoke() ?? true)
                         cardStructs.Add(value2, type.Name);
 
                     CardMod.Mod.Logger.Debug($"Success! Field '{type.Name}' was added to an array.");

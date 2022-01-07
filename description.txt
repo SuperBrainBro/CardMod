@@ -14,3 +14,4 @@ Beta 0.1
 
 Developers:
 	 FoxXD_
+	 Vincent Jenei (Lite#4249)
