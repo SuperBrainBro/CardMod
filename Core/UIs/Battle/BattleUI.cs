@@ -207,7 +207,7 @@ namespace CardMod.Core.UIs.Battle
             }
 
             string str = $"{value2}{size.ToUpper()}";
-            if (value2 <= 0)
+            if (value2 < 0)
                 return "0";
             return str;
         }

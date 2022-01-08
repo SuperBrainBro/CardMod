@@ -8,6 +8,8 @@ Discord Link: https://discord.gg/BzHmfb8V3c
 
 Changelog:
 
+Beta 0.2
+	 Made EoW Card dealing atleast 1 damage if no weapon held. It also now capped.
 Beta 0.1
 	 Initial version. Codebase and some initial cards are created.
 	 Introduced Experimental Function: Battle UI

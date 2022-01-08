@@ -3,6 +3,7 @@ using System;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
+using System.IO;
 
 namespace CardMod.Content.Projectiles.Friendly
 {
@@ -23,13 +24,12 @@ namespace CardMod.Content.Projectiles.Friendly
 
 		public override void SetDefaults()
 		{
-			Projectile.width = 32;
-			Projectile.height = 34;
+			Projectile.Size = new(32);
 			Projectile.aiStyle = -1;
 			Projectile.tileCollide = false;
 			Projectile.ignoreWater = true;
 			Projectile.penetrate = -1;
-			Projectile.timeLeft = 3600;
+			Projectile.noEnchantmentVisuals = true;
 		}
 
 		public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
@@ -56,13 +56,13 @@ namespace CardMod.Content.Projectiles.Friendly
 			return new Vector2(num, num2);
 		}
 
+		public double num = 1f;
+		public bool flag = false;
 		public override void AI()
 		{
 			Player player = Main.player[Projectile.owner];
 			Lighting.AddLight(Projectile.Center, Color.MediumPurple.ToVector3());
 
-			float num = 1f;
-			bool flag = false;
 			if (!flag)
             {
 				num += 0.0275f;
@@ -72,18 +72,18 @@ namespace CardMod.Content.Projectiles.Friendly
 			else
 			{
 				num -= 0.0275f;
-				if (num < 0.75f)
+				if (num <= 0.75f)
 					flag = false;
 			}
 
 			rot += 0.05f;
-			Projectile.Center = player.Center + RotateVector(default, new Vector2(0f, 175 * MathF.Sqrt(num)), rot + Projectile.ai[0] * 1.54666674f);
+			Projectile.Center = player.Center + RotateVector(default, new Vector2(0f, 175 * MathF.Sqrt((float)num)), rot + Projectile.ai[0] * 1.54666674f);
 			Projectile.velocity.X = (Projectile.position.X > player.position.X) ? 1f : (-1f);
 			if (Projectile.ai[1] > 0f)
 			{
 				fadeOut = 0.15f;
 				Projectile.friendly = false;
-				timer++;
+				timer += Main.rand.Next(1, 10);
 				if (timer > 60)
 				{
 					for (int i = 0; i < 15; i++)
@@ -119,5 +119,17 @@ namespace CardMod.Content.Projectiles.Friendly
 					Projectile.frame = 0;
 			}
 		}
-	}
+
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+			writer.Write(num);
+			writer.Write(flag);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+			num = reader.ReadDouble();
+			flag = reader.ReadBoolean();
+        }
+    }
 }
