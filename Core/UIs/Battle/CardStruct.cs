@@ -12,7 +12,7 @@ namespace CardMod.Core.UIs.Battle
         public Func<bool> condition;
         public int[] abilitiesOnCard;
 
-        public static CardStruct Null => new(0, 0, 1, null, () => true, new int[] { 0, 0 });
+        public static CardStruct Null => new(0, 0, 0, null, () => true, new int[] { 0, 0 });
 
         public CardStruct(int card, int damage = 0, int health = 1, Action<CardStruct> ability = null, Func<bool> condition = null, int[] abilitiesOnCard = null)
         {

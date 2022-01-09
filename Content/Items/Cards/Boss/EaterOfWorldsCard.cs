@@ -38,6 +38,8 @@ namespace CardMod.Content.Items.Cards.Boss
                     int cap = (int)(75
                         * MathF.Sqrt(player.HeldItem.damage * player.GetDamage(player.HeldItem.DamageType).Multiplicative)
                         / 10);
+                    if (cap < 1)
+                        cap = 1;
                     if (damage < 1)
                         damage = 1;
                     if (damage > cap)
