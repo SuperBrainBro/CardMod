@@ -28,7 +28,7 @@ namespace CardMod.Core
             if (mouseTextIndex != -1)
             {
                 layers.Insert(mouseTextIndex, new LegacyGameInterfaceLayer(
-                    "Card Mod: UI",
+                    "Card Mod: Battle UI",
                     delegate
                     {
                         if (_lastUpdateUiGameTime != null && mod.BattleInterface?.CurrentState != null && BattleUI.visible && CardMod.Experimental)

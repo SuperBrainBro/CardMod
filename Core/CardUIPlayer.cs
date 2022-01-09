@@ -42,16 +42,17 @@ namespace CardMod.Core
             {
                 for (int i = 0; i < cards.Length; i++)
                 {
-                    cards[i] = new CardStruct(
-                        Main.rand.NextBool(2).ToInt() + 1,
-                        Main.rand.Next(1, 100),
-                        Main.rand.Next(100, 2500),
-                        abilitiesOnCard: new int[2] { Main.rand.NextBool(2).ToInt() + 1, Main.rand.NextBool(2).ToInt() + 1 });
-                    cards2[i] = new CardStruct(
-                        Main.rand.NextBool(2).ToInt() + 1,
-                        Main.rand.Next(1, 100),
-                        Main.rand.Next(100, 2500),
-                        abilitiesOnCard: new int[2] { Main.rand.NextBool(2).ToInt() + 1, Main.rand.NextBool(2).ToInt() + 1 });
+                    int[] value = new int[5] { Main.rand.Next(Cards.Count - 1), Main.rand.Next(1, 100), Main.rand.Next(100, 2500), Main.rand.NextBool(2).ToInt() + 1, Main.rand.NextBool(2).ToInt() + 1 };
+                    cards[i] = new CardStruct(value[0], value[1], value[2],
+                        abilitiesOnCard: new int[2] { value[3], value[4] });
+
+                    int[] value2 = new int[5] { Main.rand.Next(Cards.Count - 1), Main.rand.Next(1, 100), Main.rand.Next(100, 2500), Main.rand.NextBool(2).ToInt() + 1, Main.rand.NextBool(2).ToInt() + 1 };
+                    cards2[i] = new CardStruct(value2[0], value2[1], value2[2],
+                        abilitiesOnCard: new int[2] { value2[3], value2[4] });
+
+                    CardMod.Mod.Logger.Debug($"Assigned card values." +
+                        $"\nValues #1.{i}: {value[0]}, {value[1]}, {value[2]}, {value[3]}, {value[4]}" +
+                        $"\nValues #2.{i}: {value2[0]}, {value2[1]}, {value2[2]}, {value2[3]}, {value2[4]}");
                 }
             }
 

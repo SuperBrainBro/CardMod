@@ -17,6 +17,7 @@ namespace CardMod.Core.UIs.Battle
         public static CardStruct RedSlime => new(4, 12, 35, abilitiesOnCard: new int[2] { 1, 2 });
         public static CardStruct PurpleSlime => new(5, 12, 40, abilitiesOnCard: new int[2] { 1, 2 });
         public static CardStruct GoldenSlime => new(6, 5, 300, abilitiesOnCard: new int[2] { 1, 2 });
+        internal static int Count = 7;
 
         public static Dictionary<CardStruct, string> GetCardDictionary()
         {

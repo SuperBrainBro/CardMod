@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
@@ -43,10 +44,10 @@ namespace CardMod.Core.UIs.Battle
 
             spriteBatch.Draw(ModContent.Request<Texture2D>("CardMod/Assets/UIs/BattleUI_Area").Value, hitbox, Color.White);
 
-            GetTextures(player.UI().cards, out string[] enemyText);
+            GetTextures(player.UI().cards, out Asset<Texture2D>[] enemyText);
             DrawIcons(spriteBatch, enemyText, player.UI().cards);
 
-            GetTextures(uiEnemy.UI().cards2, out string[] playerText);
+            GetTextures(uiEnemy.UI().cards2, out Asset<Texture2D>[] playerText);
             DrawIcons(spriteBatch, playerText, uiEnemy.UI().cards2, true);
 
             DrawMiddle(spriteBatch, player.UI().cards, uiEnemy.UI().cards2);
@@ -91,10 +92,9 @@ namespace CardMod.Core.UIs.Battle
             }
         }
 
-        private void DrawIcons(SpriteBatch batch, string[] values, CardStruct[] @struct, bool isPlayer = false)
+        private void DrawIcons(SpriteBatch batch, Asset<Texture2D>[] values, CardStruct[] @struct, bool isPlayer = false)
         {
             Rectangle hitbox = panel.GetInnerDimensions().ToRectangle();
-            string path = "CardMod/Assets/UIs";
 
             int[] heights = new int[3] { 20, 92, 42 };
             if (isPlayer)
@@ -115,13 +115,13 @@ namespace CardMod.Core.UIs.Battle
                     new Vector2(hitbox.X + 76 + 90 * i, hitbox.Y + heights[2])
                 };
 
-                batch.Draw(ModContent.Request<Texture2D>(values[i]).Value, hits, cardColor);
+                batch.Draw(values[i].Value, hits, cardColor);
                 for (int j = 0; j < 2; j++)
-                    if (@struct[i].abilitiesOnCard.Length == 2 && @struct[i].abilitiesOnCard != null)
-                        batch.Draw(ModContent.Request<Texture2D>($"{path}/Cards/Ability_{@struct[i].abilitiesOnCard[j]}").Value, vectors2[j], cardColor);
+                    if (@struct[i].abilitiesOnCard.Length == 2 && @struct[i].abilitiesOnCard != null && @struct[i].abilitiesOnCard[j] >= 0)
+                        batch.Draw(ModContent.Request<Texture2D>($"CardMod/Assets/UIs/Cards/Ability_{@struct[i].abilitiesOnCard[j]}").Value, vectors2[j], cardColor);
 
                 if (@struct[i].dead)
-                    batch.Draw(ModContent.Request<Texture2D>($"{path}/BattleUI_Cross").Value, hits, Color.White);
+                    batch.Draw(ModContent.Request<Texture2D>("CardMod/Assets/UIs/BattleUI_Cross").Value, hits, Color.White);
 
                 if (@struct[i].damage > 0 && !@struct[i].dead)
                     Utils.DrawBorderString(batch, ToGoodInt(@struct[i].damage), vectors[0], Color.White, 0.8f);
@@ -143,29 +143,18 @@ namespace CardMod.Core.UIs.Battle
             }
         }
 
-        private static void GetTextures(CardStruct[] cards, out string[] texture)
+        private static void GetTextures(CardStruct[] cards, out Asset<Texture2D>[] texture)
         {
-            texture = new string[4];
+            texture = new Asset<Texture2D>[4];
             for (int j = 0; j < 4; j++)
             {
-                if (cards[j] != null)
+                if (cards[j] != null && cards[j].card >= 1)
                 {
-                    if (cards[j].card == 1)
-                    {
-                        texture[j] = "CardMod/Assets/UIs/Cards/Card_BlueSlime";
-                    }
-                    else if (cards[j].card == 2)
-                    {
-                        texture[j] = "CardMod/Assets/UIs/Cards/Card_GreenSlime";
-                    }
-                    else
-                    {
-                        texture[j] = "CardMod/Assets/UIs/BattleUI_Card";
-                    }
+                    texture[j] = ModContent.Request<Texture2D>($"CardMod/Assets/UIs/Cards/Card_{cards[j].card}");
                 }
                 else
                 {
-                    texture[j] = "CardMod/Assets/UIs/BattleUI_Card";
+                    texture[j] = ModContent.Request<Texture2D>("CardMod/Assets/UIs/BattleUI_Card");
                 }
             }
         }
@@ -185,22 +174,22 @@ namespace CardMod.Core.UIs.Battle
             int value2 = value;
             string size = "";
 
-            if (value2 >= 1000 && size == "")
+            if (value2 >= 1000)
             {
                 value2 /= 1000;
                 size = "k";
             }
-            if (value2 >= 1000 && size == "k")
+            if (value2 >= 1000)
             {
                 value2 /= 1000;
                 size = "m";
             }
-            if (value2 >= 1000 && size == "m")
+            if (value2 >= 1000)
             {
                 value2 /= 1000;
                 size = "b";
             }
-            if (value2 >= 1000 && size == "b")
+            if (value2 >= 1000)
             {
                 value2 /= 1000;
                 size = "t";
