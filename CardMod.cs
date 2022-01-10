@@ -2,6 +2,7 @@ using CardMod.Content.Items.Cards.Misc;
 using CardMod.Core;
 using CardMod.Core.UIs.Battle;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;

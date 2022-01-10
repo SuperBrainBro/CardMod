@@ -22,8 +22,7 @@ namespace CardMod.Core
         public static bool Moving(this Player player) => Math.Abs(player.velocity.X) + Math.Abs(player.velocity.Y) > 1.0f && !player.rocketFrame;
 
         /// <summary>
-        /// THIS HUGE FUCK IS BELONGS TO MrPlague,
-        /// PERMISSION GRANTED BY MrPlague TO USE IT HERE
+        /// PERMISSION GRANTED BY MrPlague TO USE IT
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
