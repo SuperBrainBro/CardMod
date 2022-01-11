@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace CardMod.Content.Buffs
+namespace CardMod.Content.Buffs.Debuffs
 {
     public class OnFireDemon : ModBuff
     {
@@ -16,7 +16,6 @@ namespace CardMod.Content.Buffs
             Main.pvpBuff[Type] = true;
             Main.debuff[Type] = true;
             Main.buffNoSave[Type] = true;
-            BuffID.Sets.LongerExpertDebuff[Type] = true;
         }
 
         public override void Update(Player player, ref int buffIndex) => player.Card().onFireDemon = true;

@@ -7,16 +7,14 @@ namespace CardMod.Content.Items.Cards.PreHardmode
     {
         public GraniteGolemCard() : base(CardRarity.Common,
             "Granite Golem Card",
-            "Ability",
-            "Description",
-            "Weakness")
+            "Overprotective",
+            "You have chance to block some damage",
+            "After block your movement speed decreases")
         {
         }
 
         public override void SafeSetDefaults() => isCard = true;
 
-        public override void CardEffects(Player player, bool hideVisuals)
-        {
-        }
+        public override void CardEffects(Player player, bool hideVisuals) => player.Card()._cardGraniteGolem = true;
     }
 }

@@ -1,4 +1,5 @@
-﻿using CardMod.Content.Items.Cards.Boss;
+﻿using CardMod.Content.Buffs.Debuffs;
+using CardMod.Content.Items.Cards.Boss;
 using CardMod.Content.Items.Cards.Hardmode;
 using CardMod.Content.Items.Cards.PreHardmode;
 using CardMod.Content.Items.Pets;
@@ -91,6 +92,11 @@ namespace CardMod.Core
         {
             if (!npc.buffImmune[BuffID.Slow] && target.Card()._cardSlime)
                 npc.AddBuff(BuffID.Slow, target.Card()._cardSlimeGreen ? 100 : 160);
+            if (target.Card()._cardGraniteGolem && Main.rand.NextBool(Main.hardMode ? 9 : 6))
+            {
+                damage = (int)(damage * Main.rand.NextFloat(0.5f, 0.75f));
+                target.AddBuff(BuffType<GraniteSlow>(), 60 * Main.rand.Next(10, 20));
+            }
         }
 
         public override void SetupShop(int type, Chest shop, ref int nextSlot)

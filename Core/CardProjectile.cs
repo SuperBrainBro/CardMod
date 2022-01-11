@@ -1,4 +1,4 @@
-﻿using CardMod.Content.Buffs;
+﻿using CardMod.Content.Buffs.Debuffs;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;

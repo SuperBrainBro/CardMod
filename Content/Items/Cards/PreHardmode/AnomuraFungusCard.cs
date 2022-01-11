@@ -7,16 +7,14 @@ namespace CardMod.Content.Items.Cards.PreHardmode
     {
         public AnomuraFungusCard() : base(CardRarity.Uncommon,
             "Anomura Fungus Card",
-            "Ability",
-            "Description",
-            "Weakness")
+            "Critical Health",
+            "Crit hits slightly heal you",
+            "When enemies crit you they slightly heal")
         {
         }
 
         public override void SafeSetDefaults() => isCard = true;
 
-        public override void CardEffects(Player player, bool hideVisuals)
-        {
-        }
+        public override void CardEffects(Player player, bool hideVisuals) => player.Card()._cardAnomuraFungus = true;
     }
 }

@@ -1,6 +1,6 @@
 displayName = Ancient Cards Mod
 author = FoxXD_, Vincent Jenei
-version = 0.1
+version = 0.1.1
 hideCode = true
 hideResources = true
 includeSource = false

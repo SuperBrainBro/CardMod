@@ -32,6 +32,8 @@ namespace CardMod.Core
         public bool _cardSnowFlinx;
         public bool _cardGiantAntlionCharger;
         public bool _cardHarpy;
+        public bool _cardGraniteGolem;
+        public bool _cardAnomuraFungus;
 
         public float infernoLevel;
         public bool foxPet;
@@ -64,6 +66,8 @@ namespace CardMod.Core
             _cardSnowFlinx = false;
             _cardGiantAntlionCharger = false;
             _cardHarpy = false;
+            _cardAnomuraFungus = false;
+            _cardGraniteGolem = false;
             foxPet = false;
         }
 
@@ -94,6 +98,8 @@ namespace CardMod.Core
             _cardSnowFlinx = false;
             _cardGiantAntlionCharger = false;
             _cardHarpy = false;
+            _cardAnomuraFungus = false;
+            _cardGraniteGolem = false;
             foxPet = false;
         }
 
@@ -169,7 +175,7 @@ namespace CardMod.Core
                     Player.lifeRegen = 0;
                 }
                 Player.lifeRegenTime = 0;
-                Player.lifeRegen -= (int)MathHelper.SmoothStep(0, 33, CardUtils.InverseLerp(Main.maxTilesY * 16, 0, Player.Center.Y, true));
+                Player.lifeRegen -= (int)MathHelper.SmoothStep(150, 10, CardUtils.InverseLerp(Main.maxTilesY * 16, 0, Player.Center.Y, true));
             }
             if (pinkJellyCard)
             {
@@ -197,6 +203,39 @@ namespace CardMod.Core
                 if (onFireDevil)
                     value += 80;
                 Player.lifeRegen -= value;
+            }
+        }
+
+        public override void OnHitByNPC(NPC npc, int damage, bool crit)
+        {
+            if (_cardAnomuraFungus && crit)
+            {
+                int num = Main.rand.Next(1, 4);
+                Player.statLife -= num;
+                npc.life += num;
+                npc.HealEffect(num);
+            }
+        }
+
+        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        {
+            if (_cardAnomuraFungus && crit)
+            {
+                int num = Main.rand.Next(1, 4);
+                target.life -= num;
+                Player.statLife += num;
+                Player.HealEffect(num);
+            }
+        }
+
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        {
+            if (_cardAnomuraFungus && crit)
+            {
+                int num = Main.rand.Next(1, 4);
+                target.life -= num;
+                Player.statLife += num;
+                Player.HealEffect(num);
             }
         }
 
