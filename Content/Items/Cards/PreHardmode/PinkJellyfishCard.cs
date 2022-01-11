@@ -1,7 +1,6 @@
 ﻿using CardMod.Core;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ModLoader;
 
 namespace CardMod.Content.Items.Cards.PreHardmode
 {

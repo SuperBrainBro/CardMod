@@ -3,7 +3,6 @@ using CardMod.Core;
 using CardMod.Core.UIs.Battle;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Mono.Cecil;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
@@ -11,7 +10,6 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
-using Terraria.Utilities;
 
 namespace CardMod
 {

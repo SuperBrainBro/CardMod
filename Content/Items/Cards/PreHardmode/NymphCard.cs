@@ -1,6 +1,5 @@
 ﻿using CardMod.Core;
 using Terraria;
-using Terraria.ID;
 
 namespace CardMod.Content.Items.Cards.PreHardmode
 {
@@ -21,16 +20,17 @@ namespace CardMod.Content.Items.Cards.PreHardmode
         {
             player.Card()._cardNymph = true;
 
-            bool flag;
-            flag = false;
+            player.blind = true;
             for (int i = 0; i < Main.maxNPCs; i++)
             {
-                if (Main.npc[i].active && Main.npc[i].Distance(player.Center) <= 350f)
-                    flag = true;
+                if (Main.npc[i].active && Main.npc[i].Distance(player.Center) <= 350f && !Main.npc[i].friendly && !Main.npc[i].townNPC)
+                    player.blind = false;
             }
-
-            if (!flag)
-                player.AddBuff(BuffID.Darkness, 2);
+            for (int i = 0; i < Main.maxPlayers; i++)
+            {
+                if (Main.player[i].whoAmI != player.whoAmI && !Main.player[i].dead && !Main.player[i].ghost && Main.player[i].active && Main.player[i].Distance(player.Center) <= 350f && Main.player[i].hostile && Main.player[i].team != player.team)
+                    player.blind = false;
+            }
         }
     }
 }
