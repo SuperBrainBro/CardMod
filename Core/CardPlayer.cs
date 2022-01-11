@@ -29,6 +29,9 @@ namespace CardMod.Core
         public bool onFireDemon;
         public bool onFireDevil;
         public bool _cardQueenSlime;
+        public bool _cardSnowFlinx;
+        public bool _cardGiantAntlionCharger;
+        public bool _cardHarpy;
 
         public float infernoLevel;
         public bool foxPet;
@@ -58,6 +61,9 @@ namespace CardMod.Core
             _cardDemon = false;
             _cardRedDevil = false;
             _cardQueenSlime = false;
+            _cardSnowFlinx = false;
+            _cardGiantAntlionCharger = false;
+            _cardHarpy = false;
             foxPet = false;
         }
 
@@ -85,6 +91,9 @@ namespace CardMod.Core
             onFireDemon = false;
             onFireDevil = false;
             _cardQueenSlime = false;
+            _cardSnowFlinx = false;
+            _cardGiantAntlionCharger = false;
+            _cardHarpy = false;
             foxPet = false;
         }
 
@@ -153,6 +162,15 @@ namespace CardMod.Core
 
         public override void UpdateBadLifeRegen()
         {
+            if (_cardHarpy && !Player.ExposedToSunlight())
+            {
+                if (Player.lifeRegen > 0)
+                {
+                    Player.lifeRegen = 0;
+                }
+                Player.lifeRegenTime = 0;
+                Player.lifeRegen -= (int)MathHelper.SmoothStep(0, 33, CardUtils.InverseLerp(Main.maxTilesY * 16, 0, Player.Center.Y, true));
+            }
             if (pinkJellyCard)
             {
                 if (Player.lifeRegen > 0)
@@ -180,6 +198,23 @@ namespace CardMod.Core
                     value += 80;
                 Player.lifeRegen -= value;
             }
+        }
+
+        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        {
+            if (_cardGiantAntlionCharger)
+            {
+                if ((damageSource.SourceProjectileType == ProjectileID.RollingCactusSpike || damageSource.SourceProjectileType == ProjectileID.RollingCactus)
+                        && (Player.ZoneDesert || Player.ZoneUndergroundDesert))
+                {
+                    damage /= 2;
+                }
+                else
+                {
+                    damage = (int)(damage * Main.rand.NextFloat(1f, 1.75f));
+                }
+            }
+            return base.PreHurt(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource);
         }
 
         public override void ModifyHitByNPC(NPC npc, ref int damage, ref bool crit)

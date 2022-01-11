@@ -13,9 +13,11 @@ Beta 0.1.1
 	 Fixed Slime Cards inflicts Slow debuff on player, instead of on enemies.
 	 Made Green Slime Card ability slightly weaker comparing to Blue Slime Card.
 	 Blue Slime, Green Slime Cards now have weaknesses.
-	 WoF and Imp Cards now have weaknesses.
+	 Wall of Flesh and Imp Cards now have weaknesses.
 	 Green, Pink and Blue Jellyfish Cards now have weaknesses.
 	 Nymph Card now have weakness.
+	 Shop Discount Card now have weakness.
+	 Added five new cards.
 Beta 0.1
 	 Initial version. Codebase and some initial cards are created.
 	 Introduced Experimental Function: Battle UI

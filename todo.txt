@@ -1,0 +1,3 @@
+﻿Cards:
+	 Anomura Fungus Card
+	 Granite Golem Card

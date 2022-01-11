@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace CardMod.Core
 {
@@ -17,6 +18,18 @@ namespace CardMod.Core
         {
             if (condition)
                 list.Add(item);
+        }
+
+        public static void AllStatIncrease(this Player player, int byNum, float byNumFloat)
+        {
+            player.GetDamage(DamageClass.Generic) += byNumFloat;
+            player.GetCritChance(DamageClass.Generic) += byNum;
+            player.moveSpeed += byNumFloat;
+            player.lifeRegen += byNum / 3;
+            player.meleeSpeed += byNum;
+            player.statDefense += byNum / 5;
+            player.pickSpeed -= byNumFloat;
+            player.minionKB += byNumFloat;
         }
 
         public static bool Moving(this Player player) => Math.Abs(player.velocity.X) + Math.Abs(player.velocity.Y) > 1.0f && !player.rocketFrame;

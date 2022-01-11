@@ -108,6 +108,12 @@ namespace CardMod.Core
             }
         }
 
+        public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
+        {
+            if (player.Card()._cardSnowFlinx && player.ZoneSnow)
+                spawnRate /= 2;
+        }
+
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
             const int normie = 200;
@@ -150,6 +156,11 @@ namespace CardMod.Core
                 NPCID.GoldenSlime => ItemType<GoldenSlimeCard>(),
                 NPCID.FireImp => ItemType<ImpCard>(),
                 NPCID.Demon => ItemType<DemonCard>(),
+                NPCID.SnowFlinx => ItemType<SnowFlinxCard>(),
+                NPCID.GiantWalkingAntlion => ItemType<GiantAntlionChargerCard>(),
+                NPCID.Harpy => ItemType<HarpyCard>(),
+                NPCID.AnomuraFungus => ItemType<AnomuraFungusCard>(),
+                NPCID.GraniteGolem => ItemType<GraniteGolemCard>(),
 
                 NPCID.GreenJellyfish => ItemType<GreenJellyfishCard>(),
                 NPCID.PirateShip => ItemType<ShopDiscountCard>(),
