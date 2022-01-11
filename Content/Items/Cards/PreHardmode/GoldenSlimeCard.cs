@@ -59,7 +59,6 @@ namespace CardMod.Content.Items.Cards.PreHardmode
                 _generated++;
                 player.QuickSpawnItem(ItemID.GoldCoin);
                 player.Card()._goldenSlimeCD = 3600;
-                Main.NewText(value * 100);
             }
 
             player.moveSpeed -= value;

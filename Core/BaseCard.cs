@@ -101,6 +101,18 @@ namespace CardMod.Core
 
         public sealed override void UpdateAccessory(Player player, bool hideVisual) => CardEffects(player, hideVisual);
 
+        public sealed override void UpdateInventory(Player player)
+        {
+            if (Item.prefix != 0)
+                Item.Prefix(0);
+
+            UpdateInventory2(player);
+        }
+
+        public virtual void UpdateInventory2(Player player)
+        {
+        }
+
         public virtual void CardEffects(Player player, bool hideVisuals)
         {
         }

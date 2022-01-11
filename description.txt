@@ -8,6 +8,8 @@ Discord Link: https://discord.gg/BzHmfb8V3c
 
 Changelog:
 
+Beta 0.1.1.1
+	 Removed debug line that weren't supposed to be.
 Beta 0.1.1
 	 Made EoW Card dealing atleast 1 damage if no weapon held. It also now capped.
 	 Fixed Slime Cards inflicts Slow debuff on player, instead of on enemies.
