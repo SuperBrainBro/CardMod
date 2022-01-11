@@ -6,6 +6,7 @@ using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace CardMod.Content.Items.Cards.PreHardmode
@@ -15,7 +16,8 @@ namespace CardMod.Content.Items.Cards.PreHardmode
         public ImpCard() : base(CardRarity.Uncommon, "Imp Card",
             "Weak Inferno",
                 "Gives you weak inferno rings," +
-              "\nwhich ignite enemies around you")
+              "\nwhich ignite enemies around you",
+            "You can't see on sunlight!")
         {
         }
 
@@ -25,6 +27,9 @@ namespace CardMod.Content.Items.Cards.PreHardmode
         {
             player.Card()._cardImp = true;
             player.Card().infernoLevel += 1f;
+
+            if (player.ExposedToSunlight())
+                player.AddBuff(BuffID.Darkness, 2);
         }
     }
 
@@ -84,7 +89,7 @@ namespace CardMod.Content.Items.Cards.PreHardmode
                         num4 -= num2 * 2f;
                     }
                     float num5 = MathHelper.Lerp(0.8f, 0f, Math.Abs(num + num2 * j - num3) * 10f);
-                    
+
                     Color color = Color.Lerp(Color.Yellow, Color.LightYellow, 0.86f);
                     Main.spriteBatch.Draw(TextureAssets.FlameRing.Value,
                            player.Center - Main.screenPosition,

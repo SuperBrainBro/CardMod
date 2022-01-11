@@ -8,7 +8,8 @@ namespace CardMod.Content.Items.Cards.PreHardmode
         public UmbrellaSlimeCard() : base(CardRarity.Uncommon,
             "Umbrella Slime Card",
             "Umbrella",
-                "Allows slowfall and removes fall damage")
+                "Allows slowfall and removes fall damage",
+            "Your movement speed decreased when it's not windy")
         {
         }
 
@@ -29,6 +30,9 @@ namespace CardMod.Content.Items.Cards.PreHardmode
                 else if (player.velocity.Y > 2f)
                     player.velocity.Y = 2f;
             }
+
+            if (!Main.WindyEnoughForKiteDrops)
+                player.moveSpeed -= 0.04f;
         }
     }
 }

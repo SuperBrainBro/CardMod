@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader;
@@ -129,7 +128,7 @@ namespace CardMod.Core.UIs.Battle
                     Utils.DrawBorderString(batch, ToGoodInt(@struct[i].health), vectors[1], Color.White, 0.8f);
             }
         }
-        
+
         private void DrawMiddle(SpriteBatch batch, CardStruct[] player, CardStruct[] enemy)
         {
             Rectangle hitbox = panel.GetInnerDimensions().ToRectangle();

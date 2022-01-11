@@ -1,6 +1,7 @@
 ﻿using CardMod.Core;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace CardMod.Content.Items.Cards.PreHardmode
 {
@@ -9,7 +10,9 @@ namespace CardMod.Content.Items.Cards.PreHardmode
         public PinkJellyfishCard() : base(CardRarity.Common,
             "Pink Jellyfish Card",
             "Jelly Regen",
-                "While in water, enemies nearby have less life regeneration")
+                "While in water, enemies nearby have less life regeneration" +
+              "\nYour regeneration speed slightly increased in water",
+            "Outside of water you have decreased regeneration")
         {
         }
 
@@ -17,6 +20,11 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 
         public override void CardEffects(Player player, bool hideVisuals)
         {
+            if (!player.wet)
+                player.lifeRegenTime -= 5;
+            else
+                player.lifeRegenTime += 10;
+
             for (int i = 0; i < Main.maxNPCs; i++)
             {
                 NPC npc = Main.npc[i];

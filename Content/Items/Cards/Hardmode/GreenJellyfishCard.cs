@@ -1,6 +1,7 @@
 ﻿using CardMod.Core;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace CardMod.Content.Items.Cards.Hardmode
 {
@@ -9,7 +10,9 @@ namespace CardMod.Content.Items.Cards.Hardmode
         public GreenJellyfishCard() : base(CardRarity.Uncommon,
             "Green Jellyfish Card",
             "Jelly Weakness",
-                "While in water, enemies nearby have less damage")
+                "While in water, enemies nearby have less damage" +
+              "\nYour damage slightly increased in water",
+            "Outside of water you have decreased damage")
         {
         }
 
@@ -17,6 +20,11 @@ namespace CardMod.Content.Items.Cards.Hardmode
 
         public override void CardEffects(Player player, bool hideVisuals)
         {
+            if (!player.wet)
+                player.GetDamage(DamageClass.Generic) -= 0.1f;
+            else
+                player.GetDamage(DamageClass.Generic) += 0.1f;
+
             for (int i = 0; i < Main.maxNPCs; i++)
             {
                 NPC npc = Main.npc[i];

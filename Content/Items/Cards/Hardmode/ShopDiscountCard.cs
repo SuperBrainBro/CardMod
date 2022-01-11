@@ -8,7 +8,8 @@ namespace CardMod.Content.Items.Cards.Hardmode
         public ShopDiscountCard() : base(CardRarity.Rare,
             "Shop Discount Card",
             "DISCOUNT",
-                "Shops prices are reduced")
+                "Shops prices are reduced",
+            "Enemies drop less coins")
         {
         }
 

@@ -123,7 +123,7 @@ namespace CardMod.Core
             {
                 hasCeilingAbove = false;
             }
-            return (!hasCeilingAbove || !behindWall) && !(player.Center.Y > Main.worldSurface * 16.0) && Main.dayTime && !(Collision.DrownCollision(player.position, player.width, player.height, player.gravDir));
+            return (!hasCeilingAbove || !behindWall) && !(player.Center.Y > Main.worldSurface * 16.0) && Main.dayTime && !Collision.DrownCollision(player.position, player.width, player.height, player.gravDir);
         }
 
         public static float InverseLerp(float from, float to, float t, bool clamped = false)

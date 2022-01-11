@@ -2,8 +2,8 @@ using CardMod.Content.Items.Cards.Misc;
 using CardMod.Core;
 using CardMod.Core.UIs.Battle;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Mono.Cecil;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
@@ -11,6 +11,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
+using Terraria.Utilities;
 
 namespace CardMod
 {
@@ -42,6 +43,7 @@ namespace CardMod
                 showUI = KeybindLoader.RegisterKeybind(Mod, "Experimental Func #2", Keys.F6);
             }
 
+            IL.Terraria.NPC.NPCLoot_DropMoney += NPC_NPCLoot_DropMoney;
             IL.Terraria.Player.TorchAttack += Player_TorchAttack;
             IL.Terraria.Player.UpdateBuffs += Player_UpdateBuffs;
 
@@ -60,6 +62,7 @@ namespace CardMod
 
             CardLists.Unload();
 
+            IL.Terraria.NPC.NPCLoot_DropMoney -= NPC_NPCLoot_DropMoney;
             IL.Terraria.Player.TorchAttack -= Player_TorchAttack;
             IL.Terraria.Player.UpdateBuffs -= Player_UpdateBuffs;
 
@@ -71,6 +74,31 @@ namespace CardMod
         public override void PostSetupContent()
         {
             BattleInterface?.SetState(BattleUI);
+        }
+
+        private void NPC_NPCLoot_DropMoney(ILContext il)
+        {
+            var c = new ILCursor(il);
+            if (!c.TryGotoNext(i => i.MatchLdfld(typeof(NPC).GetField(nameof(NPC.midas)))))
+                return;
+            int num4 = 0;
+            if (!c.TryGotoNext(i => i.MatchLdloc(out num4)))
+                return;
+            if (!c.TryGotoNext(i => i.MatchStloc(out _)))
+                return;
+            if (!c.TryGotoNext(i => i.MatchStloc(out _)))
+                return;
+
+            c.Index++;
+            c.Emit(OpCodes.Ldarg_1);
+            c.Emit(OpCodes.Ldloc, num4);
+            c.EmitDelegate<Func<Player, float, float>>((player, num) =>
+            {
+                if (player.Card()._cardDiscount)
+                    num *= 1f - Main.rand.Next(15, 55) * 0.01f;
+                return num;
+            });
+            c.Emit(OpCodes.Stloc, num4);
         }
 
         private void Player_TorchAttack(ILContext il)

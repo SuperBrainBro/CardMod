@@ -10,6 +10,12 @@ Changelog:
 
 Beta 0.2
 	 Made EoW Card dealing atleast 1 damage if no weapon held. It also now capped.
+	 Fixed Slime Cards inflicts Slow debuff on player, instead of on enemies.
+	 Made Green Slime Card ability slightly weaker comparing to Blue Slime Card.
+	 Blue Slime, Green Slime Cards now have weaknesses.
+	 WoF and Imp Cards now have weaknesses.
+	 Green, Pink and Blue Jellyfish Cards now have weaknesses.
+	 Nymph Card now have weakness.
 Beta 0.1
 	 Initial version. Codebase and some initial cards are created.
 	 Introduced Experimental Function: Battle UI
@@ -17,6 +23,7 @@ Beta 0.1
 Developers:
 	 FoxXD_
 	 Vincent Jenei (Lite#4249)
+	 Syncrow (spriter)
 
 Credits:
 	 MrPlague (Exposed to Sunlight method)

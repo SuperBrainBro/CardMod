@@ -28,7 +28,7 @@ namespace CardMod.Content.Items.Cards.Boss
                     Projectile.NewProjectile(player.GetProjectileSource_Accessory(Item), player.Center.X, player.Center.Y, 0f, 0f, ModContent.ProjectileType<ShadowOrbs>(), 10, 8f, player.whoAmI, i);
                 }
             }
-            
+
             for (int j = 0; j < 1000; j++)
             {
                 Projectile projectile = Main.projectile[j];

@@ -90,7 +90,7 @@ namespace CardMod.Core
         public override void OnHitPlayer(NPC npc, Player target, int damage, bool crit)
         {
             if (!npc.buffImmune[BuffID.Slow] && target.Card()._cardSlime)
-                target.AddBuff(BuffID.Slow, 160);
+                npc.AddBuff(BuffID.Slow, target.Card()._cardSlimeGreen ? 100 : 160);
         }
 
         public override void SetupShop(int type, Chest shop, ref int nextSlot)
@@ -119,17 +119,17 @@ namespace CardMod.Core
             switch (npc.type)
             {
                 case NPCID.GiantFlyingFox:
-                    npcLoot.Add(ItemDropRule.Common(ItemType<FoxCookie>(), 100));
+                    npcLoot.Add(ItemDropRule.ByCondition(new MCondition.IsExperimental(), ItemType<FoxCookie>(), 100));
                     break;
 
                 case NPCID.EaterofWorldsHead:
-                    npcLoot.Add(ItemDropRule.ByCondition(new MCondition.EOWHeadLast(), ItemType<EaterOfWorldsCard>(), boss));
+                    npcLoot.Add(ItemDropRule.ByCondition(new MCondition.EOWPieceLast(0), ItemType<EaterOfWorldsCard>(), boss));
                     break;
                 case NPCID.EaterofWorldsBody:
-                    npcLoot.Add(ItemDropRule.ByCondition(new MCondition.EOWBodyLast(), ItemType<EaterOfWorldsCard>(), boss));
+                    npcLoot.Add(ItemDropRule.ByCondition(new MCondition.EOWPieceLast(1), ItemType<EaterOfWorldsCard>(), boss));
                     break;
                 case NPCID.EaterofWorldsTail:
-                    npcLoot.Add(ItemDropRule.ByCondition(new MCondition.EOWTailLast(), ItemType<EaterOfWorldsCard>(), boss));
+                    npcLoot.Add(ItemDropRule.ByCondition(new MCondition.EOWPieceLast(2), ItemType<EaterOfWorldsCard>(), boss));
                     break;
                 default:
                     break;
@@ -165,15 +165,13 @@ namespace CardMod.Core
                 _ => 0,
             };
 
-            int chance = npc.type switch
+            int chance = !npc.boss ? npc.type switch
             {
                 NPCID.PirateCorsair or NPCID.PirateCrossbower or NPCID.PirateDeadeye or NPCID.PirateDeckhand => (int)(normie * 12.5),
                 NPCID.PirateCaptain => normie * 5,
 
                 _ => normie,
-            };
-            if (npc.boss)
-                chance = boss;
+            } : boss;
 
             if (card != 0)
                 npcLoot.Add(ItemDropRule.Common(card, chance));
@@ -181,41 +179,48 @@ namespace CardMod.Core
 
         public static class MCondition
         {
-            public class EOWHeadLast : IItemDropRuleCondition, IProvideItemConditionDescription
+            public class IsExperimental : IItemDropRuleCondition, IProvideItemConditionDescription
             {
                 public bool CanDrop(DropAttemptInfo info)
                 {
-                    bool head = NPC.CountNPCS(NPCID.EaterofWorldsHead) == 1;
-                    bool body = NPC.CountNPCS(NPCID.EaterofWorldsBody) == 0;
-                    bool tail = NPC.CountNPCS(NPCID.EaterofWorldsTail) == 0;
-                    return head && body && tail;
+                    if (info.IsInSimulation)
+                        return false;
+                    return CardMod.Experimental;
                 }
 
-                public bool CanShowItemDropInUI() => true;
+                public bool CanShowItemDropInUI() => CardMod.Experimental;
 
                 public string GetConditionDescription() => null;
             }
-            public class EOWBodyLast : IItemDropRuleCondition, IProvideItemConditionDescription
+            public class EOWPieceLast : IItemDropRuleCondition, IProvideItemConditionDescription
             {
-                public bool CanDrop(DropAttemptInfo info)
+                public int[] pieces = new int[3];
+
+                public EOWPieceLast(int piece)
                 {
-                    bool head = NPC.CountNPCS(NPCID.EaterofWorldsHead) == 0;
-                    bool body = NPC.CountNPCS(NPCID.EaterofWorldsBody) == 1;
-                    bool tail = NPC.CountNPCS(NPCID.EaterofWorldsTail) == 0;
-                    return head && body && tail;
+                    if (piece <= 0)
+                        pieces = new int[3] { 1, 0, 0 };
+                    else if (piece == 1)
+                        pieces = new int[3] { 0, 1, 0 };
+                    else
+                        pieces = new int[3] { 0, 0, 1 };
                 }
 
-                public bool CanShowItemDropInUI() => true;
+                public EOWPieceLast(EOWPiece piece)
+                {
+                    if (piece <= EOWPiece.Head)
+                        pieces = new int[3] { 1, 0, 0 };
+                    else if (piece == EOWPiece.Body)
+                        pieces = new int[3] { 0, 1, 0 };
+                    else
+                        pieces = new int[3] { 0, 0, 1 };
+                }
 
-                public string GetConditionDescription() => null;
-            }
-            public class EOWTailLast : IItemDropRuleCondition, IProvideItemConditionDescription
-            {
                 public bool CanDrop(DropAttemptInfo info)
                 {
-                    bool head = NPC.CountNPCS(NPCID.EaterofWorldsHead) == 0;
-                    bool body = NPC.CountNPCS(NPCID.EaterofWorldsBody) == 0;
-                    bool tail = NPC.CountNPCS(NPCID.EaterofWorldsTail) == 1;
+                    bool head = NPC.CountNPCS(NPCID.EaterofWorldsHead) == pieces[0];
+                    bool body = NPC.CountNPCS(NPCID.EaterofWorldsBody) == pieces[1];
+                    bool tail = NPC.CountNPCS(NPCID.EaterofWorldsTail) == pieces[2];
                     return head && body && tail;
                 }
 
@@ -224,5 +229,12 @@ namespace CardMod.Core
                 public string GetConditionDescription() => null;
             }
         }
+    }
+
+    public enum EOWPiece
+    {
+        Head,
+        Body,
+        Tail
     }
 }

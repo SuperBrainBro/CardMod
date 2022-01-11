@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Creative;
-using Terraria.GameContent.UI;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -132,7 +131,8 @@ namespace CardMod.Core
                 if (amountNeeded - sacrificeCount > 0)
                 {
                     tooltips.Add(new TooltipLine(Mod, "CreativeSacrifice", Language.GetTextValue("CommonItemTooltip.CreativeSacrificeNeeded",
-                        amountNeeded - sacrificeCount)) { overrideColor = Colors.JourneyMode });
+                        amountNeeded - sacrificeCount))
+                    { overrideColor = Colors.JourneyMode });
                 }
             }
 

@@ -15,6 +15,7 @@ namespace CardMod.Core
         public bool _cardWof;
         public bool _cardImp;
         public bool _cardSlime;
+        public bool _cardSlimeGreen;
         public bool greenJellyCard;
         public bool greenJellyCardImmune;
         public bool pinkJellyCard;
@@ -44,6 +45,7 @@ namespace CardMod.Core
             _cardWof = false;
             _cardImp = false;
             _cardSlime = false;
+            _cardSlimeGreen = false;
             infernoLevel = 0;
             greenJellyCard = false;
             greenJellyCardImmune = false;
@@ -68,6 +70,7 @@ namespace CardMod.Core
             _cardWof = false;
             _cardImp = false;
             _cardSlime = false;
+            _cardSlimeGreen = false;
             infernoLevel = 0;
             greenJellyCard = false;
             greenJellyCardImmune = false;

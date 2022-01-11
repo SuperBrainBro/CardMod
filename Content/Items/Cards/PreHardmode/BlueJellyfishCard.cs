@@ -1,6 +1,7 @@
 ﻿using CardMod.Core;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace CardMod.Content.Items.Cards.PreHardmode
 {
@@ -9,7 +10,9 @@ namespace CardMod.Content.Items.Cards.PreHardmode
         public BlueJellyfishCard() : base(CardRarity.Common,
             "Blue Jellyfish Card",
             "Jelly Defense",
-                "While in water, nearby enemies have less defense")
+                "While in water, nearby enemies have less defense" +
+              "\nYour defense slightly increased in water",
+            "Outside of water you have decreased defense")
         {
         }
 
@@ -17,6 +20,11 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 
         public override void CardEffects(Player player, bool hideVisuals)
         {
+            if (!player.wet)
+                player.statDefense -= 5;
+            else
+                player.statDefense += 7;
+
             for (int i = 0; i < Main.maxNPCs; i++)
             {
                 NPC npc = Main.npc[i];

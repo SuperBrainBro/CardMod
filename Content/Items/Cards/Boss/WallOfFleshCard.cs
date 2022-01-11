@@ -6,6 +6,7 @@ using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace CardMod.Content.Items.Cards.Boss
@@ -16,7 +17,8 @@ namespace CardMod.Content.Items.Cards.Boss
             "Wall of Flesh Card",
             "Strong Inferno",
                 "Gives you strong inferno rings," +
-              "\nwhich ignite enemies around you")
+              "\nwhich ignite enemies around you",
+            "You can't see on sunlight!")
         {
         }
 
@@ -28,6 +30,9 @@ namespace CardMod.Content.Items.Cards.Boss
             player.Card().infernoLevel += 5f;
             player.inferno = false;
             player.lifeRegen += 10;
+
+            if (player.ExposedToSunlight())
+                player.AddBuff(BuffID.Obstructed, 2);
         }
     }
 
