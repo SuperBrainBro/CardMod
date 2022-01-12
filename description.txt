@@ -8,6 +8,11 @@ Discord Link: https://discord.gg/BzHmfb8V3c
 
 Changelog:
 
+Beta 0.1.1.3
+	 Thanks tModLoader for crashing my PC <3
+Beta 0.1.1.2
+	 Fixed Blue Slime and Green Slime Cards from removing player's breath COMPLETELY after equipping. (rejoining in world fixes that tho)
+	 Also nerfed their weaknesses.
 Beta 0.1.1.1
 	 Removed debug line that weren't supposed to be.
 Beta 0.1.1
