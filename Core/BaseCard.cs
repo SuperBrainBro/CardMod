@@ -89,22 +89,19 @@ namespace CardMod.Core
         {
         }
 
-        public sealed override string Texture
-        {
-            get
-            {
-                return ModContent.RequestIfExists<Texture2D>((GetType().Namespace + "." + Name).Replace('.', '/').Replace("Content", "Assets"), out _)
+        public sealed override string Texture => ModContent.RequestIfExists<Texture2D>((GetType().Namespace + "." + Name).Replace('.', '/').Replace("Content", "Assets"), out _)
                     ? (GetType().Namespace + "." + Name).Replace('.', '/').Replace("Content", "Assets")
                     : $"CardMod/Assets/Items/Cards/Card{cardRarity}";
-            }
-        }
 
         public sealed override void UpdateAccessory(Player player, bool hideVisual) => CardEffects(player, hideVisual);
 
         public sealed override void UpdateInventory(Player player)
         {
             if (Item.prefix != 0)
+            {
+                Item.prefix = 0;
                 Item.Prefix(0);
+            }
 
             UpdateInventory2(player);
         }

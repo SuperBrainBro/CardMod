@@ -8,6 +8,8 @@ Discord Link: https://discord.gg/BzHmfb8V3c
 
 Changelog:
 
+Beta 0.1.2
+	 Cards now unable to have Accessory prefixes.
 Beta 0.1.1.3
 	 Thanks tModLoader for crashing my PC <3
 Beta 0.1.1.2
