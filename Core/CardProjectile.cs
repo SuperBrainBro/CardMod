@@ -25,7 +25,7 @@ namespace CardMod.Core
             Player player = Main.player[projectile.owner];
             if (player.Card()._cardNymph)
             {
-                float num = MathHelper.SmoothStep(1f, 2f, CardUtils.InverseLerp(400f, 175f, target.Distance(player.Center), true));
+                float num = MathHelper.SmoothStep(1f, 2f, CardUtils.InverseLerp(400f, 175f, target.Distance(player.Center), true)) * CardPlayer.GetCardMultiplier(player);
                 damage = (int)Math.Ceiling(damage * num);
             }
             if (player.Card()._cardDemon || player.Card()._cardRedDevil)
@@ -45,7 +45,7 @@ namespace CardMod.Core
             Player player = Main.player[projectile.owner];
             if (player.Card()._cardNymph)
             {
-                float num = MathHelper.SmoothStep(1f, 2f, CardUtils.InverseLerp(400f, 175f, target.Distance(player.Center), true));
+                float num = MathHelper.SmoothStep(1f, 2f, CardUtils.InverseLerp(400f, 175f, target.Distance(player.Center), true)) * CardPlayer.GetCardMultiplier(player);
                 damage = (int)Math.Ceiling(damage * num);
             }
             if (player.Card()._cardDemon || player.Card()._cardRedDevil)

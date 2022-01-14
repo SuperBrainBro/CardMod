@@ -20,8 +20,8 @@ namespace CardMod.Content.Items.Cards.PreHardmode
         public override void CardEffects(Player player, bool hideVisuals)
         {
             player.Card()._cardHarpy = true;
-            player.AllStatIncrease((int)MathHelper.SmoothStep(-5, 15, CardUtils.InverseLerp(Main.maxTilesY * 16, 0, player.Center.Y, true)),
-                MathHelper.SmoothStep(-0.5f, 0.5f, CardUtils.InverseLerp(Main.maxTilesY * 16, 0, player.Center.Y, true)));
+            player.AllStatIncrease((int)MathHelper.SmoothStep(-5, 15, CardUtils.InverseLerp(Main.maxTilesY * 16, 0, player.Center.Y, true) * CardPlayer.GetCardMultiplier(player)),
+                MathHelper.SmoothStep(-0.5f, 0.5f, CardUtils.InverseLerp(Main.maxTilesY * 16, 0, player.Center.Y, true)) * CardPlayer.GetCardMultiplier(player));
         }
     }
 }

@@ -1,8 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace CardMod.Core
 {
@@ -35,8 +39,12 @@ namespace CardMod.Core
         public bool _cardGraniteGolem;
         public bool _cardAnomuraFungus;
 
+        public bool haveObtainedTorchGodCardCheck;
         public float infernoLevel;
         public bool foxPet;
+
+        private float CardMultiplier = 1f;
+        public static float GetCardMultiplier(Player player) => player.Card().CardMultiplier;
 
         public bool InfernoWeak => infernoLevel is < 3f and >= 1f;
         public bool InfernoMedium => infernoLevel is >= 3f and < 5f;
@@ -69,6 +77,17 @@ namespace CardMod.Core
             _cardAnomuraFungus = false;
             _cardGraniteGolem = false;
             foxPet = false;
+
+            float values = 1f;
+            if (CardMod.cardMultipliers.Count > 0)
+            {
+                foreach (ValueTuple<Func<bool>, float> dict in CardMod.cardMultipliers)
+                {
+                    if (dict.Item1.Invoke())
+                        values += dict.Item2;
+                }
+            }
+            CardMultiplier = values;
         }
 
         public override void UpdateDead()
@@ -101,6 +120,7 @@ namespace CardMod.Core
             _cardAnomuraFungus = false;
             _cardGraniteGolem = false;
             foxPet = false;
+            CardMultiplier = 1f;
         }
 
         public override void PreUpdate()
@@ -260,6 +280,16 @@ namespace CardMod.Core
         {
             if (CardLists.Slimes.Contains(npc.type) && Player.Card()._cardQueenSlime && !Player.ZoneHallow)
                 damage = (int)(damage * Main.rand.NextFloat(0.95f, 3f));
+        }
+
+        public override void SaveData(TagCompound tag)
+        {
+            tag["HaveObtainedTorchGodCardCheck"] = haveObtainedTorchGodCardCheck;
+        }
+
+        public override void LoadData(TagCompound tag)
+        {
+            haveObtainedTorchGodCardCheck = tag.GetBool("HaveObtainedTorchGodCardCheck");
         }
     }
 }

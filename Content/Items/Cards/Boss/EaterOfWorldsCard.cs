@@ -45,7 +45,7 @@ namespace CardMod.Content.Items.Cards.Boss
                     if (damage > cap)
                         damage = cap;
 
-                    projectile.damage = damage;
+                    projectile.damage = (int)(damage * CardPlayer.GetCardMultiplier(player));
                     projectile.DamageType = player.HeldItem.DamageType;
                     projectile.timeLeft = 2;
                 }

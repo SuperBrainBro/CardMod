@@ -17,7 +17,7 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 
         public override void CardEffects(Player player, bool hideVisuals)
         {
-            player.wingTimeMax = (int)(player.wingTimeMax * 1.2f);
+            player.wingTimeMax = (int)(player.wingTimeMax * 1.2f * CardPlayer.GetCardMultiplier(player));
             player.Card()._cardBird = true;
         }
     }

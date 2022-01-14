@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Input;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -21,6 +23,7 @@ namespace CardMod
         internal BattleUI BattleUI;
         internal static ModKeybind prepareCards;
         internal static ModKeybind showUI;
+        public static List<ValueTuple<Func<bool>, float>> cardMultipliers;
 
         public static Mod Mod { get => mod; private set => mod = value; }
 
@@ -29,6 +32,7 @@ namespace CardMod
             Mod = this;
 
             CardLists.Load();
+            cardMultipliers = new List<ValueTuple<Func<bool>, float>>();
 
             if (Experimental)
             {
@@ -59,6 +63,7 @@ namespace CardMod
             Mod = null;
 
             CardLists.Unload();
+            cardMultipliers = null;
 
             IL.Terraria.NPC.NPCLoot_DropMoney -= NPC_NPCLoot_DropMoney;
             IL.Terraria.Player.TorchAttack -= Player_TorchAttack;
@@ -110,9 +115,15 @@ namespace CardMod
             c.Emit(OpCodes.Ldarg_0);
             c.EmitDelegate<Action<Player>>((player) =>
             {
-                int number = Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, ModContent.ItemType<TorchGodCard>(), 1, false, 0, false, false);
-                if (Main.netMode == NetmodeID.MultiplayerClient)
-                    NetMessage.SendData(MessageID.SyncItem, -1, -1, null, number, 1f, 0f, 0f, 0, 0, 0);
+                if (!player.Card().haveObtainedTorchGodCardCheck)
+                {
+                    int number = Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, ModContent.ItemType<TorchGodCard>(), 1, false, 0, false, false);
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                    {
+                        NetMessage.SendData(MessageID.SyncItem, -1, -1, null, number, 1f, 0f, 0f, 0, 0, 0);
+                    }
+                    player.Card().haveObtainedTorchGodCardCheck = true;
+                }
             });
         }
 
@@ -243,6 +254,31 @@ namespace CardMod
                                 }
                             default:
                                 Mod.Logger.Error("Unknown first argument!");
+                                return false;
+                        }
+                    }
+                    else if (args[1] is Func<bool> function)
+                    {
+                        switch (callType)
+                        {
+                            case "addcardmultiplier":
+                                if (args[2] is float floatean)
+                                {
+                                    cardMultipliers.Add(new ValueTuple<Func<bool>, float>(function, floatean));
+
+                                    ValueTuple<Func<bool>, float>[] dict = cardMultipliers.ToList().ToArray();
+                                    Array.Resize(ref dict, cardMultipliers.Count);
+                                    cardMultipliers = dict.ToList();
+
+                                    Mod.Logger.Debug($"Added custom Multiplier by{(args[3] is Mod mod ? $": {mod.Name}" : " some mod")}, succesfully!");
+                                    return true;
+                                }
+                                else
+                                {
+                                    Mod.Logger.Error("Third argument should be float!");
+                                }
+                                return false;
+                            default:
                                 return false;
                         }
                     }

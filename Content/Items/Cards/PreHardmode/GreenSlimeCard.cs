@@ -17,7 +17,7 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 
         public override void CardEffects(Player player, bool hideVisuals)
         {
-            player.breath = -1;
+            player.breath -= 2;
             player.Card()._cardSlime = true;
             player.Card()._cardSlimeGreen = true;
         }

@@ -22,7 +22,7 @@ namespace CardMod.Content.Items.Cards.PreHardmode
             if (!player.wet)
                 player.lifeRegenTime -= 5;
             else
-                player.lifeRegenTime += 10;
+                player.lifeRegenTime += (int)(10 * CardPlayer.GetCardMultiplier(player));
 
             for (int i = 0; i < Main.maxNPCs; i++)
             {

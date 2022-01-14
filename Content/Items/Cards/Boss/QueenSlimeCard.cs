@@ -43,7 +43,7 @@ namespace CardMod.Content.Items.Cards.Boss
                             vector = new(-10, 10);
                         else if (i == 7)
                             vector = new(10, -10);
-                        int num = Projectile.NewProjectile(player.GetProjectileSource_Accessory(Item), player.Center, vector.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-15, 15))), ProjectileID.VolatileGelatinBall, 90, 0f, player.whoAmI);
+                        int num = Projectile.NewProjectile(player.GetProjectileSource_Accessory(Item), player.Center, vector.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-15, 15))), ProjectileID.VolatileGelatinBall, (int)(90 * CardPlayer.GetCardMultiplier(player)), 0f, player.whoAmI);
                         Main.projectile[num].friendly = true;
                         Main.projectile[num].hostile = false;
                         Main.projectile[num].DamageType = player.HeldItem.DamageType;

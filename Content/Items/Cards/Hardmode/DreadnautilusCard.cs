@@ -22,7 +22,7 @@ namespace CardMod.Content.Items.Cards.Hardmode
         {
             if (player.statLife < player.statLifeMax2 * 0.5)
             {
-                player.GetDamage(DamageClass.Generic) += 0.1f;
+                player.GetDamage(DamageClass.Generic) += 0.1f * CardPlayer.GetCardMultiplier(player);
             }
 
             if (player.statLife > player.statLifeMax2 * 0.75)

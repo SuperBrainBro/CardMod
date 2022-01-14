@@ -17,8 +17,8 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 
         public override void CardEffects(Player player, bool hideVisuals)
         {
-            Player.jumpHeight += 8;
-            Player.jumpSpeed += 3f;
+            Player.jumpHeight += (int)(8 * CardPlayer.GetCardMultiplier(player));
+            Player.jumpSpeed += 3f * CardPlayer.GetCardMultiplier(player);
             player.statLifeMax2 = (int)(player.statLifeMax2 * 0.95f);
         }
     }

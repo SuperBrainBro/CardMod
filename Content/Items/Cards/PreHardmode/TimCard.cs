@@ -20,9 +20,9 @@ namespace CardMod.Content.Items.Cards.PreHardmode
 
         public override void CardEffects(Player player, bool hideVisuals)
         {
-            player.statManaMax2 += 40;
-            player.GetDamage(DamageClass.Magic) += 0.04f;
-            player.GetCritChance(DamageClass.Magic) += 8;
+            player.statManaMax2 += (int)(40 * CardPlayer.GetCardMultiplier(player));
+            player.GetDamage(DamageClass.Magic) += (int)(0.04f * CardPlayer.GetCardMultiplier(player));
+            player.GetCritChance(DamageClass.Magic) += (int)(8 * CardPlayer.GetCardMultiplier(player));
 
             player.statLifeMax2 -= 10;
         }

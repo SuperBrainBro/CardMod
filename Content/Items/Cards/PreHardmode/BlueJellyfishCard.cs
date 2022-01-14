@@ -22,7 +22,7 @@ namespace CardMod.Content.Items.Cards.PreHardmode
             if (!player.wet)
                 player.statDefense -= 5;
             else
-                player.statDefense += 7;
+                player.statDefense += (int)(7 * CardPlayer.GetCardMultiplier(player));
 
             for (int i = 0; i < Main.maxNPCs; i++)
             {

@@ -21,9 +21,9 @@ namespace CardMod.Content.Items.Cards.Hardmode
         public override void CardEffects(Player player, bool hideVisuals)
         {
             if (!player.wet)
-                player.GetDamage(DamageClass.Generic) -= 0.1f;
+                player.GetDamage(DamageClass.Generic) -= 0.1f * CardPlayer.GetCardMultiplier(player);
             else
-                player.GetDamage(DamageClass.Generic) += 0.1f;
+                player.GetDamage(DamageClass.Generic) += 0.1f * CardPlayer.GetCardMultiplier(player);
 
             for (int i = 0; i < Main.maxNPCs; i++)
             {
