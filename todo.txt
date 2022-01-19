@@ -1,3 +1,9 @@
 ﻿Cards:
-	 Anomura Fungus Card
-	 Granite Golem Card
+	 Zombie Card
+	 Pyranha Card
+	 Crab Card
+	 Demon Eye Card
+	 Eye of Cthulhu Card
+	 Salamander Card
+	 Shark Card
+	 Squid Card
