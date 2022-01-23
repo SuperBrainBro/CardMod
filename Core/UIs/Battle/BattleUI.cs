@@ -14,6 +14,9 @@ namespace CardMod.Core.UIs.Battle
         public UIPanel panel;
         public UIImage area;
 
+        private static readonly Player player = Main.player[Main.myPlayer];
+        private static readonly Player uiEnemy = player;
+
         public override void OnInitialize()
         {
             panel = new UIPanel();
@@ -35,8 +38,6 @@ namespace CardMod.Core.UIs.Battle
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             base.DrawSelf(spriteBatch);
-            Player player = Main.LocalPlayer;
-            Player uiEnemy = player;
 
             #region Drawing
             Rectangle hitbox = panel.GetInnerDimensions().ToRectangle();
@@ -55,17 +56,14 @@ namespace CardMod.Core.UIs.Battle
             DoAction();
         }
 
-        private static int _actionTimer = 60;
+        private static readonly int[] _actionTimer = new int[4] { 60, 60, 60, 60 };
         private static void DoAction()
         {
-            Player player = Main.LocalPlayer;
-            Player uiEnemy = player;
-
             if (Main.instance.IsActive && !Main.gamePaused)
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    if (_actionTimer <= 0)
+                    if (_actionTimer[i] <= 0)
                     {
                         if (player.UI().cards[i].health > 0 && !player.UI().cards2[i].dead)
                         {
@@ -81,11 +79,11 @@ namespace CardMod.Core.UIs.Battle
                                 uiEnemy.UI().cards2[i].dead = true;
                         }
 
-                        _actionTimer = 60;
+                        _actionTimer[i] = 60;
                     }
                     else
                     {
-                        _actionTimer -= 10;
+                        _actionTimer[i] -= Main.rand.Next(10) + 1;
                     }
                 }
             }

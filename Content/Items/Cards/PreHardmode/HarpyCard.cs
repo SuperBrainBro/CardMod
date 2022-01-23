@@ -22,6 +22,11 @@ namespace CardMod.Content.Items.Cards.PreHardmode
             player.Card()._cardHarpy = true;
             player.AllStatIncrease((int)MathHelper.SmoothStep(-5, 15, CardUtils.InverseLerp(Main.maxTilesY * 16, 0, player.Center.Y, true) * CardPlayer.GetCardMultiplier(player)),
                 MathHelper.SmoothStep(-0.5f, 0.5f, CardUtils.InverseLerp(Main.maxTilesY * 16, 0, player.Center.Y, true)) * CardPlayer.GetCardMultiplier(player));
+
+            if (player.pickSpeed >= 1.35f)
+                player.pickSpeed = 1.349f;
+            if (player.meleeSpeed <= 0f)
+                player.meleeSpeed = 0.01f;
         }
     }
 }

@@ -1,4 +1,4 @@
-displayName = Ancient Cards Mod
+displayName = The Gathering Dusk
 author = FoxXD_, Vincent Jenei
 version = 0.1.1.3
 hideCode = true

@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -87,7 +85,7 @@ namespace CardMod.Core
                         values += dict.Item2;
                 }
             }
-            CardMultiplier = values;
+            CardMultiplier = MathF.Sqrt(values);
         }
 
         public override void UpdateDead()

@@ -24,6 +24,7 @@ namespace CardMod.Core
         {
             player.GetDamage(DamageClass.Generic) += byNumFloat;
             player.GetCritChance(DamageClass.Generic) += byNum;
+            player.GetKnockback(DamageClass.Generic) += byNumFloat;
             player.moveSpeed += byNumFloat;
             player.lifeRegen += byNum / 3;
             player.meleeSpeed += byNum;

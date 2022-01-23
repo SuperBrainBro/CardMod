@@ -1,14 +1,12 @@
-An essential mod - Ancient Cards Mod - adds in an entirely new 'accesory' system with its own slot. Every monster has a chance to drop their own designated card. Each enemy's card will provide it's beholder with cool and unique effects. However, only 1 card can be equipped at a time. This means cards have a synergistic effect with accesories, but they can't have synergy with other cards. That makes them each balanced. Instead of drastically changing how you play Terraria, these cards add a new collectable aspect and another reason to grind up those monsters!
-
-	Quality > Quantity
-	Great addition to any modded playthrough.
-	Every monster, including bosses, have their own card.
+WIP Mod!
 
 Discord Link: https://discord.gg/BzHmfb8V3c
 
 Changelog:
 
 Beta 0.1.2
+	 Renamed mod.
+	 Fixed Harpy Card being broken at Underworld Level.
 	 Cards now unable to have Accessory prefixes.
 Beta 0.1.1.3
 	 Thanks tModLoader for crashing my PC <3
